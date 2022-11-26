@@ -1,0 +1,19 @@
+#menu{
+    display: flex;
+}
+#product{
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+#product .product-body{
+    text-align: center;
+}
+#product .product-title{
+    text-decoration: none;
+}
+#product .product-price{
+    font-size: large;
+    font-weight:bold;
+}       
