@@ -3,7 +3,7 @@ const { sequelize,DataTypes } = require('../config/db');
 
 const user = sequelize.define('user', {
   // Model attributes are defined here
-  username: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -41,6 +41,16 @@ console.log(user === sequelize.models.user); // true
 
 async function findUser(account){
   const userInstance = await user.findOne({where : {account:account}})
+  if (userInstance === null){
+    console.log('Not found!')
+  }else{
+    console.log('User is found!')
+  }
+  return userInstance
+}
+async function findAllUser(){
+  const userInstance = await user.findAll()
+  console.log(userInstance)
   if (userInstance === null){
     console.log('Not found!')
   }else{
@@ -91,4 +101,4 @@ async function updateUser(name, account, password){
 // addUser('hu','test','123')
 // updateUser('hu','hh','12345')
 
-module.exports ={user,findUser,addUser,removeUser,updateUser}
+module.exports ={user,findUser,findAllUser,addUser,removeUser,updateUser}

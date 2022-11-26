@@ -7,5 +7,3 @@ exports.getListCharity = async (req,res,next) =>{
 
     res.render('users/charity', {charityList : charityList})
 }
-
-

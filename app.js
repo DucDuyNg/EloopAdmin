@@ -10,11 +10,13 @@ const indexRouter = require('./routes/index');
 const productRouter = require('./products/productRouter');
 
 const usersRouter = require('./users/userRouter');
-const loginRouter = require('./routes/login');
-const adminRouter = require('./routes/admin');
+
 const feedbackRouter = require('./routes/feedback');
 const recycleRouter = require('./recycles/recycleRouter');
 const charityRouter = require('./charities/charityRouter');
+
+const loginRouter = require('./routes/login');
+const adminRouter = require('./admins/adminRouter');
     
 
 const app = express();
