@@ -15,7 +15,7 @@ const feedbackRouter = require('./routes/feedback');
 const recycleRouter = require('./recycles/recycleRouter');
 const charityRouter = require('./charities/charityRouter');
 
-const loginRouter = require('./routes/login');
+const loginRouter = require('./login/loginRouter');
 const adminRouter = require('./admins/adminRouter');
     
 

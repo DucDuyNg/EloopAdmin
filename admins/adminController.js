@@ -1,5 +1,20 @@
 const { charity } = require('../models/charity');
-const {user,findUser,findAllUser,addUser,removeUser,updateUser} = require('../models/user')
+const {user,findUser,findAllUser,addUser,removeUser,updateUser} = require('../models/user.js')
+
+// exports.postAdminLogin = async (req,res,next) => {
+//     console.log(req.body);
+//     const existUser = await findUser(req.body.usermail)
+//     console.log(existUser)
+//     if(existUser !== null && existUser.password === req.body.password){
+//         console.log('Login success')
+//         res.render('admins/admin')
+//     } else {
+//         console.log('Wrong account or password')
+//         res.redirect('/login')
+//     }
+
+    
+// }
 
 exports.getSumCharity = async (req,res,next) =>{
 
