@@ -26,6 +26,6 @@ exports.getSumCharity = async (req,res,next) =>{
         }   
     }
     ListUser[0].number_charity = sumCharity;
-    res.render('admins/admin', {charity : ListUser[0]})
+    res.render('admins/admin', {charity : ListUser[0],adminLogin : true})
 }
 

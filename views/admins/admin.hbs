@@ -1,3 +1,20 @@
+{{#if adminLogin}}
+<script type="text/javascript">
+window.onload = function() {
+    window.console.log(`admin ne `)
+    
+    let login = sessionStorage.getItem("isLogin");
+    window.console.log(login)
+    if(login === undefined || login === null){
+        window.location = "http://localhost:3000/admin"
+    }
+    sessionStorage.setItem("isLogin", true);
+}
+</script> 
+{{/if }}
+
+
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -410,6 +427,7 @@
                 <div id="reportsChart"></div>
 
                 <script>
+
                   document.addEventListener("DOMContentLoaded", () => {
                     new ApexCharts(document.querySelector("#reportsChart"), {
                       series: [{
