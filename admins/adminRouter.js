@@ -5,6 +5,6 @@ const adminLogin = require('../login/loginController')
 
 // router.post('/login', adminController.postAdminLogin);
 router.get('/', adminController.getSumCharity);
-// router.post('/', adminController.getSumCharity);
+router.post('/', adminController.getSumCharity);
 
 module.exports = router;

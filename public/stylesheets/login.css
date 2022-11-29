@@ -149,11 +149,12 @@
   height: 250px;
   transform: rotateX(-90deg) translateZ(225px); }
 
-.nav {
+#login .nav {
   margin: 20px 0;
-  padding-left: 400px; }
+  padding-left: 400px; 
+}
 
-.nav li {
+#login .nav li {
   display: inline-block;
   list-style-type: none;
   font-size: 1em;
@@ -162,7 +163,7 @@
   position: relative;
   cursor: pointer; }
 
-.nav li:after {
+#login .nav li:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -171,7 +172,7 @@
   border-bottom: 1px solid #42509e;
   transition: all ease-in 0.25s; }
 
-.nav li:hover:after {
+#login .nav li:hover:after {
   width: 100%; }
 
 .psw, .signup {
