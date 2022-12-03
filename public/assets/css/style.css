@@ -1235,8 +1235,8 @@ h6 {
 -----------------------*/
 
 .featured {
-	padding-top: 80px;
-	padding-bottom: 40px;
+	padding-top: 40px;
+	padding-bottom: 10px;
 }
 
 .featured__controls {
@@ -1274,7 +1274,7 @@ h6 {
 }
 
 .featured__item {
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 }
 
 .featured__item:hover .featured__item__pic .featured__item__pic__hover {
@@ -1282,14 +1282,14 @@ h6 {
 }
 
 .featured__item__pic {
-	height: 270px;
+	height: 50px;
 	position: relative;
 	overflow: hidden;
 	background-position: center center;
 }
 
 .featured__item__pic__hover {
-	position: absolute;
+	/* position: absolute; */
 	left: 0;
 	bottom: -50px;
 	width: 100%;

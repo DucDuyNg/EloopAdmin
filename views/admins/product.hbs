@@ -1,3 +1,43 @@
+{{!-- <script src="/products/script.js">
+
+</script> --}}
+
+ <script type="text/javascript">
+    function queryParameter(){
+      // http://localhost:3000/menu/explore?partner=&catalogue=&price=
+      const baseUrl = "https://eloop-user-hda.herokuapp.com/menu/explore?"
+      var partnerParam = "partner="
+      let catalogueParam = "catalogue="
+      let priceParam = "price="
+  
+      //check partner list
+      let partnerList = document.getElementById("flush-collapseOne").getElementsByClassName("form-check-input")
+      for (let i = 0; i < partnerList.length; i++) {
+        if (partnerList[i].checked){
+          partnerParam += (partnerList[i].id).toString()
+        }
+      }
+      //check catalogue list
+      let catalogueList = document.getElementById("flush-collapseTwo").getElementsByClassName("form-check-input")
+      for (let i = 0; i < catalogueList.length; i++) {
+        if(catalogueList[i].checked){
+          catalogueParam += (catalogueList[i].id).toString()
+        }
+      }
+      //check price list
+      let priceList = document.getElementById("flush-collapseThree").getElementsByClassName("form-check-input")
+      for (let i = 0; i < priceList.length; i++) {
+        if (priceList[i].checked){
+          priceParam +=  (priceList[i].id).toString()
+        }
+      } 
+      
+      window.location= `${baseUrl}${partnerParam}&${catalogueParam}&${priceParam}`
+    }
+ 
+
+ </script>
+
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
@@ -234,12 +274,35 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link " href="admin.hbs">
+      <a class="nav-link " href="/admin">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="/product">
+              <i class="bi bi-circle"></i><span>Products</span>
+            </a>
+          </li>
+          <li>
+            <a href="/distributors">
+              <i class="bi bi-circle"></i><span>Distributors</span>
+            </a>
+          </li>
+          <li>
+            <a href="/recycles">
+              <i class="bi bi-circle"></i><span>Recycles</span>
+            </a>
+          </li>
+          
+        </ul>
+    </li><!-- End Components Nav -->
 
 
     <li class="nav-heading">Pages</li>
@@ -262,207 +325,119 @@
     <h1>Products</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="admins/admin.hbs">Home</a></li>
+        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
         <li class="breadcrumb-item active">Products</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
-
   <section class="section dashboard">
-      <div class="row">
+    <div class="row">
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
 
-            <!-- Left side columns -->
-            <div class="col-lg-12">
-                  <div class="row">
-                        <!-- Featured Section Begin -->
-                        <div class="col-12">
-                              <div class="card">
-                                    <section class="featured spad">
-                                          <div class="container">
-                                                <div class="row">
-                                                <div class="col-lg-12">
-                                                      <div class="section-title">
-                                                            <h2>Oganic Product</h2>
-                                                      </div>
-                                                      <div class="featured__controls">
-                                                            <ul>
-                                                            <li class="active" data-filter="*">All</li>
-                                                            <li data-filter=".oranges">Oranges</li>
-                                                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                                                            <li data-filter=".vegetables">Vegetables</li>
-                                                            <li data-filter=".fastfood">Fastfood</li>
-                                                            </ul>
-                                                      </div>
-                                                </div>
-                                                </div>
-                                                <div class="row featured__filter">
-                                                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                                                      <div class="featured__item">
-                                                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
-                                                            <ul class="featured__item__pic__hover">
-                                                                  <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                            </ul>
-                                                            </div>
-                                                            <div class="featured__item__text">
-                                                            <h6><a href="#">Crab Pool Security</a></h6>
-                                                            <h5>$30.00</h5>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                                                      <div class="featured__item">
-                                                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                                                            <ul class="featured__item__pic__hover">
-                                                                  <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                            </ul>
-                                                            </div>
-                                                            <div class="featured__item__text">
-                                                            <h6><a href="#">Crab Pool Security</a></h6>
-                                                            <h5>$30.00</h5>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                                                      <div class="featured__item">
-                                                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-3.jpg">
-                                                            <ul class="featured__item__pic__hover">
-                                                                  <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                            </ul>
-                                                            </div>
-                                                            <div class="featured__item__text">
-                                                            <h6><a href="#">Crab Pool Security</a></h6>
-                                                            <h5>$30.00</h5>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                                                      <div class="featured__item">
-                                                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-4.jpg">
-                                                            <ul class="featured__item__pic__hover">
-                                                                  <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                            </ul>
-                                                            </div>
-                                                            <div class="featured__item__text">
-                                                            <h6><a href="#">Crab Pool Security</a></h6>
-                                                            <h5>$30.00</h5>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                                                      <div class="featured__item">
-                                                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
-                                                            <ul class="featured__item__pic__hover">
-                                                                  <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                            </ul>
-                                                            </div>
-                                                            <div class="featured__item__text">
-                                                            <h6><a href="#">Crab Pool Security</a></h6>
-                                                            <h5>$30.00</h5>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                                                      <div class="featured__item">
-                                                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                                                            <ul class="featured__item__pic__hover">
-                                                                  <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                            </ul>
-                                                            </div>
-                                                            <div class="featured__item__text">
-                                                            <h6><a href="#">Crab Pool Security</a></h6>
-                                                            <h5>$30.00</h5>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                                                      <div class="featured__item">
-                                                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-7.jpg">
-                                                            <ul class="featured__item__pic__hover">
-                                                                  <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                            </ul>
-                                                            </div>
-                                                            <div class="featured__item__text">
-                                                            <h6><a href="#">Crab Pool Security</a></h6>
-                                                            <h5>$30.00</h5>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                                                      <div class="featured__item">
-                                                            <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-8.jpg">
-                                                            <ul class="featured__item__pic__hover">
-                                                                  <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                                  <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                            </ul>
-                                                            </div>
-                                                            <div class="featured__item__text">
-                                                            <h6><a href="#">Crab Pool Security</a></h6>
-                                                            <h5>$30.00</h5>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                </div>
-                                          </div>
-                                          
-                                    </section>
+              <!-- Featured Section Begin -->
+              <section class="featured spad">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <div class="section-title">
+                                  <h2>Oganic Product</h2>
                               </div>
-                        </div>
+                              <div class="featured__controls">
+                                  <ul>
+                                      <li class="active" data-filter="*">All</li>
+                                      <li data-filter=".oranges">Oranges</li>
+                                      <li data-filter=".fresh-meat">Fresh Meat</li>
+                                      <li data-filter=".vegetables">Vegetables</li>
+                                      <li data-filter=".fastfood">Fastfood</li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row featured__filter">
+                          <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                              <div class="featured__item">
+                                  <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
+                                      <ul class="featured__item__pic__hover">
+                                          <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                          <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                          <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                      </ul>
+                                  </div>
+                                  <div class="featured__item__text">
+                                      <h6><a href="#">Crab Pool Security</a></h6>
+                                      <h5>$30.00</h5>
+                                  </div>
+                              </div>
+                          </div>
+                         
+                          <div class="col-7" id="product">
+                            <div class="card" style="width: 15rem;">
+                                
+                              {{#each productList}}
+                                <img src="{{productImageUrl}}" alt="{{productName}}">
+                                <div class="product-body">
+      
+                                  <a href="product/detail/{{id}}" class="product-title">
+                                    {{productName}}
+                                  </a>
+                                  <p class="product-price">
+                                    {{price}}đ
+                                  </p>
+                                  {{!-- <form action="/order/{{id}}" method="post">         
+                                    <button class="learn-more">
+                                      <a href="#">
+                                          <span class="circle" aria-hidden="true">
+                                              <span class="icon arrow"></span>
+                                          </span>
+                                          
+                                          <span class="button-text">Mua</span>
+                                      </a>
+                                    </button>
+                                  </form> --}}
+                                </div>
+                                 <div class="featured__item">                                                                   
+                                  <div class="featured__item__pic set-bg">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            
+                                    </ul>
+                                  </div>
+                                </div>     
+                                 {{/each}}
+                                {{!-- product-list : End --}}
+
+                                  {{!-- sort-list : Start --}}
+                                  <div class="col-2 sort-list"></div>
+                                  {{!-- sort-list : End --}}
+                            </div>
+                          </div>
+                          
+                      </div>
                   </div>
+              </section>
+              <!-- Featured Section End -->
             </div>
+          </div>
+        </div>
       </div>
-    <!-- Featured Section End -->
+    </div>
   </section>
+
+
+</main>
 
 
   
 
-</main><!-- End #main -->
-<div id="menu" class="container">
-    {{#each sellProductList}}
-    <div class="card" style="width: 18rem;">
-      <img src="{{productImageUrl}}" alt="{{productName}}">
-      {{!-- <a href="/menu/sss">sss</a> --}}
-      <div class="product-body">
-        <a href="product/detail/{{id}}" class="product-title">
-          {{productName}}
-        </a>
-        <p class="product-price">
-          {{price}}đ
-        </p>
-        <form action="/order/{{id}}" method="post">
-          <button class="learn-more">
-            <a href="#">
-                <span class="circle" aria-hidden="true">
-                    <span class="icon arrow"></span>
-                </span>
-                <span class="button-text">Loại bỏ</span>
-            </a>
-          </button>
-        </form>
-      </div>
-    </div>
-    {{/each}}
-    {{!-- product-list : End --}}
+ 
+ 
 
-    {{!-- sort-list : Start --}}
-    <div class="col-2 sort-list"></div>
-    {{!-- sort-list : End --}}
-  </div>
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
