@@ -6,7 +6,7 @@ window.onload = function() {
     let login = sessionStorage.getItem("isLogin");
     window.console.log(login)
     if(login === undefined || login === null){
-        window.location = "http://localhost:3000/admin"
+        window.location = "https://eloop-admin-hda.herokuapp.com/admin"
     }
     sessionStorage.setItem("isLogin", true);
 }

@@ -20,7 +20,7 @@ const adminRouter = require('./admins/adminRouter');
     
 
 const app = express();
-const port = 3000;
+let port = process.env.PORT || 80
 
 // view engine setup
 app.engine('.hbs', handlebars.engine({
@@ -41,7 +41,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //
-app.listen(port, () => {
+app.listen(port || 3000, () => {
   console.log(`Example app listening on http://localhost:${port}`)
 })
 
@@ -54,6 +54,7 @@ app.listen(port, () => {
 // app.use('/feedback', feedbackRouter);
 app.use('/login', loginRouter);
 app.use('/admin', adminRouter);
+app.use('/', loginRouter);
 // app.use('/recycle', recycleRouter);
 // app.use('/charity', charityRouter);
 
