@@ -7,7 +7,7 @@ const handlebars = require('express-handlebars')
 
 const homeRouter = require('./home/homeRouter');
 const indexRouter = require('./routes/index');
-const productRouter = require('./products/productRouter');
+
 
 const usersRouter = require('./users/userRouter');
 
@@ -17,7 +17,7 @@ const charityRouter = require('./charities/charityRouter');
 
 const loginRouter = require('./login/loginRouter');
 const adminRouter = require('./admins/adminRouter');
-    
+const productRouter = require('./products/productRouter');
 
 const app = express();
 let port = process.env.PORT || 80
@@ -54,7 +54,7 @@ app.listen(port || 3000, () => {
 // app.use('/feedback', feedbackRouter);
 app.use('/login', loginRouter);
 app.use('/admin', adminRouter);
-app.use('/', loginRouter);
+app.use('/product', productRouter);
 // app.use('/recycle', recycleRouter);
 // app.use('/charity', charityRouter);
 
