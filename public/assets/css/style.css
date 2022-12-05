@@ -1440,3 +1440,45 @@ h6 {
 	color: #252525;
 	font-weight: 700;
 }
+
+
+/* Upload file button */
+.btnDefault,
+.btnUpload {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  color: #333333;
+  cursor: pointer;
+  font-weight: 400;
+  display: inline-block;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.btnDefault:focus,
+.btnDefault:hover,
+.btnUpload:focus,
+.btnUpload:hover {
+  background-color: #E6E6E6;
+}
+.btnM {
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+.customUpload {
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.customUpload input.upload {
+  cursor: pointer;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

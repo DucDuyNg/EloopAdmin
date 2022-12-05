@@ -19,6 +19,8 @@ const adminRouter = require('./admins/adminRouter');
 const productRouter = require('./products/productRouter');
 const recycleRouter = require('./recycles/recycleRouter');
 const distributorRouter = require('./distributors/distributorRouter');
+const profileRouter = require('./profile/profileRouter');
+
 const app = express();
 let port = process.env.PORT || 80
 
@@ -57,7 +59,9 @@ app.use('/admin', adminRouter);
 app.use('/product', productRouter);
 app.use('/recycle', recycleRouter);
 app.use('/distributor', distributorRouter);
+app.use('/profile', profileRouter);
 // app.use('/charity', charityRouter);
+
 
 
 // catch 404 and forward to error handler

@@ -24,7 +24,7 @@
   {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
   
     
-
+  
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -47,17 +47,18 @@
 
   </head>
   <body>
-    {{!-- {{>header}} --}}
+    {{>header}}
 
 
     
     {{{body}}}
-{{!-- 
 
 
-    {{>footer}} --}}
+
+    {{>footer}}
     
     <script>
+      sessionStorage.setItem("URLpage", "https://eloop-admin-hda.herokuapp.com/admin");
       let prism = document.querySelector(".rec-prism");
       function showSignup(){
         prism.style.transform = "translateZ(-100px) rotateY( -90deg)";
