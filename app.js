@@ -10,15 +10,15 @@ const indexRouter = require('./routes/index');
 
 
 const usersRouter = require('./users/userRouter');
-
 const feedbackRouter = require('./routes/feedback');
-const recycleRouter = require('./recycles/recycleRouter');
 const charityRouter = require('./charities/charityRouter');
+
 
 const loginRouter = require('./login/loginRouter');
 const adminRouter = require('./admins/adminRouter');
 const productRouter = require('./products/productRouter');
-
+const recycleRouter = require('./recycles/recycleRouter');
+const distributorRouter = require('./distributors/distributorRouter');
 const app = express();
 let port = process.env.PORT || 80
 
@@ -41,7 +41,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //
-app.listen(port || 3000, () => {
+app.listen(port || 80, () => {
   console.log(`Example app listening on http://localhost:${port}`)
 })
 
@@ -55,7 +55,8 @@ app.listen(port || 3000, () => {
 app.use('/login', loginRouter);
 app.use('/admin', adminRouter);
 app.use('/product', productRouter);
-// app.use('/recycle', recycleRouter);
+app.use('/recycle', recycleRouter);
+app.use('/distributor', distributorRouter);
 // app.use('/charity', charityRouter);
 
 
