@@ -1,3 +1,18 @@
+{{#if adminLogin}}
+<script type="text/javascript">
+window.onload = function() {
+    window.console.log(`admin ne `)
+    
+    let login = sessionStorage.getItem("isLogin");
+    window.console.log(login)
+    if(login === undefined || login === null){
+        window.location = "https://eloop-admin-hda.herokuapp.com/admin"
+    }
+    sessionStorage.setItem("isLogin", true);
+}
+</script> 
+{{/if }}
+
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -9,6 +24,8 @@
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
+
+    
 
     <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -49,7 +66,6 @@
       </a>
     </li><!-- End Customer's Orders Nav -->
 
-
     <li class="nav-heading">Pages</li>
 
 
@@ -64,14 +80,16 @@
 
 </aside><!-- End Sidebar-->
 
+
+
 <main id="main" class="main">
 
   <div class="pagetitle">
-    <h1>Recycles</h1>
+    <h1>Customer's Order</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-        <li class="breadcrumb-item active">Recycles</li>
+        <li class="breadcrumb-item active">Customer's Order</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -90,9 +108,9 @@
       </div>
     </div>
   </section>
-
-
 </main>
+<!-- End #main -->
+
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
     class="bi bi-arrow-up-short"></i></a>
@@ -109,6 +127,3 @@
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
-
-
-

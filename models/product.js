@@ -93,60 +93,168 @@ async function updateProduct(id,productImageUrl, productName, price,description)
   }
 }
 
-async function getProductList(partnerId,catalogueName,price){
+async function getPriceList(){
+  const prices = await sequelize.query(`SELECT max(price) FROM products`, 
+  { type: sequelize.QueryTypes.SELECT});
+
+  const maxPriceLength =  Math.pow(10,String(prices[0]['max(price)']).length - 1)
+  
+  const maxPrice = Math.round(prices[0]['max(price)'] / maxPriceLength) * maxPriceLength
+
+  const mediumPrice = Math.round(maxPrice / (maxPriceLength * 3 / 2)) * maxPriceLength
+
+  const minPrice = Math.round(maxPrice / (maxPriceLength * 3)) * maxPriceLength 
+  
+  return [minPrice ,mediumPrice ,maxPrice ]
+}
+
+async function getProductList(partnerId,catalogueId,price,sortType){
+
+  // price split 
+  let minPrice = parseInt(price.split(',')[0])
+  let highPrice = parseInt(price.split(',')[1])
+  
+  // get catalogueId
   let productList = null
-  catalogueId = ""
-  if(catalogueName !== ""){
-    const catalogue = await sequelize.query(`SELECT id FROM catalogues WHERE name = "${catalogueName}"`, 
-                                              { type: sequelize.QueryTypes.SELECT});
-    if(catalogue[0] === undefined){
-      return null
-    }   
-    catalogueId = catalogue[0].id;        
-  }
-                      
-  // all
-  if(partnerId === "" && catalogueId === "" && price === ""){
-    productList = await product.findAll()
-    console.log("case1");
-  }
-  // empty one atribute
-  else if(partnerId === "" && catalogueId !== "" && price !== ""){
-    productList = await product.findAll({where : {catalogueId: catalogueId,price : price}})
-    console.log("case2");
-  }
-  else if(partnerId !== "" && catalogueId !== "" && price === ""){
-    productList = await product.findAll({where : {partnerId: partnerId,catalogueId : catalogueId}})
-    console.log("case3");
-  }
-  else if(partnerId !== "" && catalogueId === "" && price !== ""){
-    productList = await product.findAll({where : {partnerId: partnerId,price :price}})
-    console.log("case4");
-  }
-  // empty two atribute
-  else if(partnerId === "" && catalogueId === "" && price !== ""){
-    productList = await product.findAll({where : {price :price}})
-    console.log("case5");
-  }
-  else if(partnerId === "" && catalogueId !== "" && price === ""){
-    productList = await product.findAll({where : {catalogueId : catalogueId}})
-    console.log("case6");
-  }
-  else if(partnerId !== "" && catalogueId === "" && price === ""){
-    productList = await product.findAll({where : {partnerId: partnerId}})
-    console.log("case7");
+
+  // declare query params
+  let partnerQueryString = ``
+  let catalogueQueryString = ``
+  let priceQueryString = ``
+  let sortTypeQueryString = ``
+
+  // partnerId handle
+  if(partnerId === ""){
+    partnerQueryString = `WHERE partnerId != 0`
   }
   else{
-    console.log("case8");
-    productList = await product.findAll({where : {partnerId: partnerId,catalogueId : catalogueId,price :price}})
+    partnerQueryString = `WHERE partnerId = ${partnerId}`
   }
+  
+  // catalogueId handle
+  if(catalogueId === ""){
+    catalogueQueryString = ``
+  }
+  else{
+    catalogueQueryString = `AND catalogueId = ${catalogueId}`
+  }
+
+  // price handle
+  if(price === ""){
+    priceQueryString = ``
+  }
+  else{
+    priceQueryString = `AND price > ${minPrice}
+                            AND price <= ${highPrice}`
+  }
+  
+  // sortType handle
+  if(sortType === ""){
+    sortTypeQueryString = ``
+  }
+  else{
+    sortTypeQueryString = `ORDER BY price ${sortType}`
+  }
+  productList = await sequelize.query(`SELECT * FROM products
+                                      ${partnerQueryString} 
+                                      ${catalogueQueryString}  
+                                      ${priceQueryString}  
+                                      ${sortTypeQueryString}   
+                                       `
+                                ,{ type: sequelize.QueryTypes.SELECT,
+                                      models: product});
   if (productList === null){
     console.log('list empty')
   }else{
     console.log('List Product is built!')
   }
+  console.log(productList.length);
   return productList
 }
+  
+// async function getProductList(partnerId,catalogueName,price,sortType){
+
+
+//   let minPrice = parseInt(price.split(',')[0])
+//   let highPrice = parseInt(price.split(',')[1])
+ 
+//   let productList = null
+//   catalogueId = ""
+//   if(catalogueName !== ""){
+//     const catalogue = await sequelize.query(`SELECT id FROM catalogues WHERE name = ${catalogueName}`, 
+//                                               { type: sequelize.QueryTypes.SELECT});
+//     if(catalogue[0] === undefined){
+//       return null
+//     }   
+//     catalogueId = catalogue[0].id;        
+//   }
+             
+//   // all
+//   if(partnerId === "" && catalogueId === "" && price === ""){
+//     productList = await product.findAll()
+//     console.log("case1");
+//   }
+//   // empty one atribute
+//   else if(partnerId === "" && catalogueId !== "" && price !== ""){
+//     productList = await sequelize.query(`SELECT * FROM products 
+//                                         WHERE catalogueId = ${catalogueId}  
+//                                               AND price > ${minPrice}  
+//                                               AND price <= ${highPrice}`, 
+//     { type: sequelize.QueryTypes.SELECT,
+//     models: product});
+//     console.log("case2");
+//   }
+//   else if(partnerId !== "" && catalogueId !== "" && price === ""){
+//     productList = await product.findAll({where : {partnerId: partnerId,catalogueId : catalogueId }})
+//     console.log("case3");
+//   }
+//   else if(partnerId !== "" && catalogueId === "" && price !== ""){
+//     productList = await sequelize.query(`SELECT * FROM products 
+//                                         WHERE partnerId = ${partnerId}    
+//                                               AND price > ${minPrice}  
+//                                               AND price <= ${highPrice}`, 
+//     { type: sequelize.QueryTypes.SELECT,
+//     models: product});
+//     console.log("case4");
+//   }
+//   // empty two atribute
+
+//   else if(partnerId === "" && catalogueId === "" && price !== ""){
+//     let a = `WHERE price > ${minPrice}`
+//     productList = await sequelize.query(`SELECT * FROM products 
+//                                         WHERE price > ${minPrice}
+//                                         AND price <= ${highPrice}`, 
+//     { type: sequelize.QueryTypes.SELECT,
+
+//     models: product});
+//     console.log("case5");
+//   }
+//   else if(partnerId === "" && catalogueId !== "" && price === ""){
+//     productList = await product.findAll({where : {catalogueId : catalogueId}})
+//     console.log("case6");
+//   }
+//   else if(partnerId !== "" && catalogueId === "" && price === ""){
+//     productList = await product.findAll({where : {partnerId: partnerId}})
+//     console.log("case7");
+//   }
+//   else{
+//     productList = await sequelize.query(`SELECT * FROM products 
+//                                         WHERE partnerId = ${partnerId}  
+//                                               AND catalogueId = ${catalogueId}  
+//                                               AND price > ${minPrice}  
+//                                               AND price <= ${highPrice}`, 
+//     { type: sequelize.QueryTypes.SELECT,
+//     models: product});
+//     console.log("case8");
+//   }
+//   if (productList === null){
+//     console.log('list empty')
+//   }else{
+//     console.log('List Product is built!')
+//   }
+//   console.log(productList.length);
+//   return productList
+// }
 
 
 async function searchProduct(key){
@@ -172,5 +280,6 @@ module.exports = {
   removeProduct,
   getProductList,
   findRelativeProduct,
-  searchProduct
+  searchProduct,
+  getPriceList
 }

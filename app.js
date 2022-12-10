@@ -20,6 +20,8 @@ const productRouter = require('./products/productRouter');
 const recycleRouter = require('./recycles/recycleRouter');
 const distributorRouter = require('./distributors/distributorRouter');
 const profileRouter = require('./profile/profileRouter');
+const accountListRouter = require('./account-list/accountListRouter');
+const customerOrderRouter = require('./customer-order/customerOrderRouter');
 
 const app = express();
 let port = process.env.PORT || 80
@@ -60,6 +62,8 @@ app.use('/product', productRouter);
 app.use('/recycle', recycleRouter);
 app.use('/distributor', distributorRouter);
 app.use('/profile', profileRouter);
+app.use('/account-list', accountListRouter);
+app.use('/customer-order', customerOrderRouter);
 // app.use('/charity', charityRouter);
 
 

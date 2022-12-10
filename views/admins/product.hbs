@@ -1,14 +1,18 @@
 {{!-- <script src="/products/script.js">
 
+
 </script> --}}
 
  <script type="text/javascript">
     function queryParameter(){
       // http://localhost:3000/menu/explore?partner=&catalogue=&price=
-      const baseUrl = "https://eloop-user-hda.herokuapp.com/menu/explore?"
+      const localURL = "http://localhost:80"
+      const hostURL = "https://eloop-user-hda.herokuapp.com"
+      const baseUrl = `${hostURL}/menu/explore?`
       var partnerParam = "partner="
       let catalogueParam = "catalogue="
       let priceParam = "price="
+      let sortingParam = "sorting="
   
       //check partner list
       let partnerList = document.getElementById("flush-collapseOne").getElementsByClassName("form-check-input")
@@ -31,11 +35,44 @@
           priceParam +=  (priceList[i].id).toString()
         }
       } 
-      
-      window.location= `${baseUrl}${partnerParam}&${catalogueParam}&${priceParam}`
-    }
- 
+      //check sort list
+      let sortingList = document.getElementById("flush-collapseFour").getElementsByClassName("form-check-input")
+      for (let i = 0; i < sortingList.length; i++) {
+        if (sortingList[i].checked){
+          sortingParam +=  (sortingList[i].id).toString()
+        }
+      }
 
+      window.location= `${baseUrl}${partnerParam}&${catalogueParam}&${priceParam}&${sortingParam}`
+    }
+
+    function queryParameter2(){
+      // http://localhost:3000/menu/explore?partner=&catalogue=&price=
+      const localURL = "http://localhost:80"
+      const hostURL = "https://eloop-user-hda.herokuapp.com"
+      const baseUrl = `${localURL}/product/explore?`
+      var partnerParam = "partner="
+      let catalogueParam = "catalogue="
+      let priceParam = "price="
+      let sortingParam = "sorting="
+
+      //check product list   
+      //console.log(document.getElementById("getCatalogue"))
+      
+      //let productList = document.getElementById("product").getElementsByClassName("product-body")
+       
+      //check catalogue list
+      let catalogueList = document.getElementById("getCatalogue").getElementsByTagName("input")
+      console.log(catalogueList[0].id)
+      for (let i = 0; i < catalogueList.length; i++) {
+        if(catalogueList[i].checked){
+          catalogueParam += (catalogueList[i].id).toString()
+        }
+      }
+      
+      
+      window.location= `${baseUrl}${partnerParam}&${catalogueParam}&${priceParam}&${sortingParam}`    
+    }
  </script>
 
 <!-- ======= Sidebar ======= -->
@@ -74,6 +111,21 @@
         </ul>
     </li><!-- End Components Nav -->
 
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/account-list">
+        <i class="bi bi-person-circle"></i>
+        <span>Account List</span>
+      </a>
+    </li><!-- End Account List Nav -->
+    
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/customer-order">
+        <i class="bi bi-cart2"></i>
+        <span>Customer's Orders</span>
+      </a>
+    </li><!-- End Customer's Orders Nav -->
+
 
     <li class="nav-heading">Pages</li>
 
@@ -90,6 +142,7 @@
 </aside><!-- End Sidebar-->
 
 <main id="main" class="main">
+  
 
   <div class="pagetitle">
     <h1>Products</h1>
@@ -109,6 +162,8 @@
             <div class="card">
 
               <!-- Featured Section Begin -->
+              {{!-- option-catalogue : Start --}}
+      <div class="accordion-item">                  
               <section class="featured spad">
                   <div class="container">
                       <div class="row">
@@ -116,80 +171,65 @@
                               <div class="section-title">
                                   <h2>Oganic Product</h2>
                               </div>
-                              <div class="featured__controls">
+                              <div class="featured__controls" id="getCatalogue">
+                                  
+    
                                   <ul>
-                                      <li class="active" data-filter="*">All</li>
-                                      <li data-filter=".oranges">Oranges</li>
-                                      <li data-filter=".fresh-meat">Fresh Meat</li>
-                                      <li data-filter=".vegetables">Vegetables</li>
-                                      <li data-filter=".fastfood">Fastfood</li>
+                                      {{!-- <li class="active" data-filter="*">All</li>  --}}
+                                                                       
+                                      {{#each catalogueList}}
+                                        <input  class="form-check-input" type="checkbox" name="product2" id="{{id}}" onclick="queryParameter2()"><li>{{name}}</li>
+                                      {{/each}}                                                                     
                                   </ul>
                               </div>
                           </div>
                       </div>
-                      <div class="row featured__filter">
-                          <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                              <div class="featured__item">
-                                  <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
-                                      <ul class="featured__item__pic__hover">
-                                          <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                      </ul>
-                                  </div>
-                                  <div class="featured__item__text">
-                                      <h6><a href="#">Crab Pool Security</a></h6>
-                                      <h5>$30.00</h5>
-                                  </div>
-                              </div>
-                          </div>
-                         
+                      <div class="row featured__filter">                        
                           <div class="col-7" id="product">
-                            <div class="card" style="width: 15rem;">
-                                
-                              {{#each productList}}
+                            
+                            {{#each productList}}
+                            <div class="card" style="width: 15rem;">                                                         
                                 <img src="{{productImageUrl}}" alt="{{productName}}">
                                 <div class="product-body">
       
                                   <a href="product/detail/{{id}}" class="product-title">
                                     {{productName}}
+                                    
                                   </a>
                                   <p class="product-price">
                                     {{price}}đ
                                   </p>
-                                  {{!-- <form action="/order/{{id}}" method="post">         
-                                    <button class="learn-more">
-                                      <a href="#">
-                                          <span class="circle" aria-hidden="true">
-                                              <span class="icon arrow"></span>
-                                          </span>
-                                          
-                                          <span class="button-text">Mua</span>
-                                      </a>
-                                    </button>
-                                  </form> --}}
+                                  
+                                
                                 </div>
-                                 <div class="featured__item">                                                                   
-                                  <div class="featured__item__pic set-bg">
-                                    <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            
-                                    </ul>
-                                  </div>
-                                </div>     
-                                 {{/each}}
+                            
+                                  <div class="col-9 featured__item">                                                                   
+                                    <div class="featured__item__pic set-bg">
+                                      <ul class="featured__item__pic__hover">
+                                          <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                          <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                          <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                              
+                                      </ul>
+                                    </div>
+                                  </div>    
+                              
+                                 
                                 {{!-- product-list : End --}}
 
                                   {{!-- sort-list : Start --}}
                                   <div class="col-2 sort-list"></div>
                                   {{!-- sort-list : End --}}
                             </div>
+                            {{/each}}
                           </div>
                           
                       </div>
+                
+                      
+         
                   </div>
+               
               </section>
               <!-- Featured Section End -->
             </div>
@@ -207,18 +247,10 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
     class="bi bi-arrow-up-short"></i></a>
 
-<!-- Vendor JS Files -->
-<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/chart.js/chart.min.js"></script>
-<script src="assets/vendor/echarts/echarts.min.js"></script>
-<script src="assets/vendor/quill/quill.min.js"></script>
-<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
 
-<!-- Template Main JS File -->
-<script src="assets/js/main.js"></script>
+
+
+
 
 
 

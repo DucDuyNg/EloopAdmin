@@ -1,4 +1,4 @@
-const {product,findProduct,addProduct,removeProduct,getProductList,findRelativeProduct} = require('../models/product')
+const {product,findProduct,addProduct,removeProduct,getProductList,findRelativeProduct,getPriceList} = require('../models/product')
 const {partner,findPartner,addPartner,removePartner,getPartnerList} = require('../models/partner')
 const {catalogue,findCatalogue,addCatalogue,removeCatalogue,getCatalogueList} = require('../models/catalogue')
 exports.getListProductQueryParam = async (req,res,next) =>{
@@ -10,15 +10,19 @@ exports.getListProductQueryParam = async (req,res,next) =>{
 
     const price = req.query.price
     console.log(req.query.price);
+
+    const sorting = req.query.sorting
+    console.log(req.query.sorting);
     
     const partnerList = await getPartnerList(partnerId);
     const catalogueList = await getCatalogueList(catalogue);
-    const productList = await getProductList(partnerId,catalogue,price);
+    const productList = await getProductList(partnerId,catalogue,price,sorting);
+    const priceList = await getPriceList();
     console.log(productList.length);
     productList.forEach(element => {
-       console.log(element.name);  
+       console.log(element.productName);  
     });
-    res.render('admins/product', {productList : productList, partnerList : partnerList,catalogueList :catalogueList})
+    res.render('admins/product', {productList : productList, partnerList : partnerList,catalogueList :catalogueList,priceList :priceList})
 }
 exports.getListProduct = async (req,res,next) =>{
     const partnerId = ""
@@ -29,12 +33,16 @@ exports.getListProduct = async (req,res,next) =>{
 
     const price = ""
     console.log(req.query.price);
+
+    const sorting = ""
+    console.log(req.query.sorting);
     
     const partnerList = await getPartnerList(partnerId);
     const catalogueList = await getCatalogueList(catalogue);
-    const productList = await getProductList(partnerId,catalogue,price);
-    console.log(productList.length);
-    res.render('admins/product', {productList : productList, partnerList : partnerList,catalogueList :catalogueList})
+    const priceList = await getPriceList();
+    const productList = await getProductList(partnerId,catalogue,price,sorting);
+   
+    res.render('admins/product', {productList , partnerList ,catalogueList, priceList})
 }
 
 // exports.getProductDetail = async (req,res,next) =>{
@@ -42,8 +50,7 @@ exports.getListProduct = async (req,res,next) =>{
 //     if(productId !== undefined){
 //         const product = await findProduct(productId);
 //         const relativeProductList = await findRelativeProduct(productId);
-//         res.render('users/detail',{product:product,relativeProductList:relativeProductList})
+//         res.render('admins/detail',{product:product,relativeProductList:relativeProductList})
 //     }
-
-//     res.render('users/detail')
+//     res.render('admins/detail')
 // }
