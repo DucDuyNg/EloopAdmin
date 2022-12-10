@@ -1,17 +1,3 @@
-{{#if adminLogin}}
-<script type="text/javascript">
-window.onload = function() {
-    window.console.log(`admin ne `)
-    
-    let login = sessionStorage.getItem("isLogin");
-    window.console.log(login)
-    if(login === undefined || login === null){
-        window.location = "https://eloop-admin-hda.herokuapp.com/admin"
-    }
-    sessionStorage.setItem("isLogin", true);
-}
-</script> 
-{{/if }}
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -100,6 +86,21 @@ window.onload = function() {
         <div class="row">
           <div class="col-12">
             <div class="card">
+              <section class="py-0 ux-section bg-light">
+    <div class="container mt-5 mb-5">
+        <div class="row d-flex align-items-center justify-content-content">
+            <h1 class="display-4 fw-bold mb-5 text-center">Các sản phẩm nhận tái chế</h1>
+            {{#each accountList}}
+            <div class="col-lg-auto ">
+                
+              <img src="{{name}}" class="img-fluid" alt="{{account}}" height="400px" width="400px">
+                  
+                    
+                
+            </div>
+            {{/each}}
+        </div>
+</section>
 
               
             </div>

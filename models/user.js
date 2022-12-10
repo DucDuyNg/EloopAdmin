@@ -97,8 +97,18 @@ async function updateUser(name, account, password){
     console.log('User is updated!')
   }
 }
+
+async function getAccountList(){
+  const accountList = await account.findAll()
+  if (accountList === null){
+    console.log('account are not exists')
+  }else{
+    console.log('account list is built!')
+  }
+  return accountList
+}
 // removeUser('huyhoang')
 // addUser('hu','test','123')
 // updateUser('hu','hh','12345')
 
-module.exports ={user,findUser,findAllUser,addUser,removeUser,updateUser}
+module.exports ={user,findUser,findAllUser,addUser,removeUser,updateUser,getAccountList}

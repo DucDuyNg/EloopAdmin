@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
-//const recycleController = require('../recycles/recycleController')
+const accountController = require('../account-list/accountListController')
 
-// router.get('/', recycleController.getListRecycle);
-router.get('/', function(req, res, next) {
-      res.render('admins/account-list');
-    });
+router.get('/', accountController.getAccountList);
+
 
 
 
