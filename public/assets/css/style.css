@@ -1482,3 +1482,7 @@ h6 {
   right: 0;
   top: 0;
 }
+
+.section-title{
+  display: block;
+}
