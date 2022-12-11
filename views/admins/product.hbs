@@ -8,7 +8,7 @@
       // http://localhost:3000/menu/explore?partner=&catalogue=&price=
       const localURL = "http://localhost:80"
       const hostURL = "https://eloop-user-hda.herokuapp.com"
-      const baseUrl = `${hostURL}/menu/explore?`
+      const baseUrl = `${localURL}/product/explore?`
       var partnerParam = "partner="
       let catalogueParam = "catalogue="
       let priceParam = "price="
@@ -54,12 +54,7 @@
       var partnerParam = "partner="
       let catalogueParam = "catalogue="
       let priceParam = "price="
-      let sortingParam = "sorting="
-
-      //check product list   
-      //console.log(document.getElementById("getCatalogue"))
-      
-      //let productList = document.getElementById("product").getElementsByClassName("product-body")
+      let sortingParam = "sorting="  
        
       //check catalogue list
       let catalogueList = document.getElementById("getCatalogue").getElementsByTagName("input")
@@ -69,8 +64,6 @@
           catalogueParam += (catalogueList[i].id).toString()
         }
       }
-      
-      
       window.location= `${baseUrl}${partnerParam}&${catalogueParam}&${priceParam}&${sortingParam}`    
     }
  </script>
@@ -142,8 +135,6 @@
 </aside><!-- End Sidebar-->
 
 <main id="main" class="main">
-  
-
   <div class="pagetitle">
     <h1>Products</h1>
     <nav>
@@ -163,83 +154,197 @@
 
               <!-- Featured Section Begin -->
               {{!-- option-catalogue : Start --}}
-      <div class="accordion-item">                  
-              <section class="featured spad">
-                  <div class="container">
-                      <div class="row">
+              <div class="accordion-item">                  
+                <section class="featured spad">              
+                    <div class="container">
+                        <div class="row">
                           <div class="col-lg-12">
                               <div class="section-title">
-                                  <h2>Oganic Product</h2>
-                              </div>
-                              <div class="featured__controls" id="getCatalogue">
-                                  
-    
-                                  <ul>
-                                      {{!-- <li class="active" data-filter="*">All</li>  --}}
-                                                                       
-                                      {{#each catalogueList}}
-                                        <input  class="form-check-input" type="checkbox" name="product2" id="{{id}}" onclick="queryParameter2()"><li>{{name}}</li>
-                                      {{/each}}                                                                     
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row featured__filter">                        
-                          <div class="col-7" id="product">
-                            
-                            {{#each productList}}
-                            <div class="card" style="width: 15rem;">                                                         
-                                <img src="{{productImageUrl}}" alt="{{productName}}">
-                                <div class="product-body">
-      
-                                  <a href="product/detail/{{id}}" class="product-title">
-                                    {{productName}}
-                                    
-                                  </a>
-                                  <p class="product-price">
-                                    {{price}}đ
-                                  </p>
-                                  
-                                
-                                </div>
-                            
-                                  <div class="col-9 featured__item">                                                                   
-                                    <div class="featured__item__pic set-bg">
-                                      <ul class="featured__item__pic__hover">
-                                          <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                          <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                              
-                                      </ul>
-                                    </div>
-                                  </div>    
-                              
-                                 
-                                {{!-- product-list : End --}}
-
-                                  {{!-- sort-list : Start --}}
-                                  <div class="col-2 sort-list"></div>
-                                  {{!-- sort-list : End --}}
-                            </div>
-                            {{/each}}
+                                  <h2>Oganic Product</h2>                 
+                                  <button class="button-41 bi bi-plus" role="button">Add</button>
+                              </div>                              
                           </div>
                           
+                        </div>
+                        {{!-- option-list : Start --}}
+                        <div class="col-3 option-list">
+                          <div class="accordion accordion-flush" >
+                            {{!-- option-partner : Start --}}
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne" >
+                                  Manufacturer
+                                </button>
+                              </h2>
+                              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
+                                <div class="accordion-body partner-list">
+                                  {{#each partnerList}}
+                                  <div class="form-check" >
+                                    <input  class="form-check-input" type="checkbox" name="partner" id="{{id}}" onclick="queryParameter()">
+                                    <label class="form-check-label" for="{{id}}" >
+                                      {{name}}
+                                    </label>
+                                  </div>
+                                  {{/each}}
+                                </div>
+                              </div>
+                            </div>
+                            {{!-- option-partner : End --}}
+
+                            {{!-- option-catalogue : Start --}}
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="true" aria-controls="flush-collapseTwo">
+                                  Category
+                                </button>
+                              </h2>
+                              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" >
+                                <div class="accordion-body">
+                                  {{#each catalogueList}}
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="catalogue" id="{{id}}" onclick="queryParameter()">
+                                    <label class="form-check-label" for="{{id}}">
+                                      {{name}}
+                                    </label>
+                                  </div>
+                                  {{/each}}
+                                </div>
+                              </div>
+                            </div>
+                            {{!-- option-catalogue : End --}}
+
+                            {{!-- option-price : Start --}}
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="true" aria-controls="flush-collapseThree">
+                                  Price
+                                </button>
+                              </h2>
+                              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" >
+                                <div class="accordion-body partner-list">
+                                  {{#if priceList}}
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="price" id="0,{{priceList.[0]}}" onclick="queryParameter()">
+                                    <label class="form-check-label" for="{{priceList.[0]}}">
+                                    0 - {{priceList.[0]}}
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="price" id="{{priceList.[0]}},{{priceList.[1]}}" onclick="queryParameter()">
+                                    <label class="form-check-label" for="{{priceList.[1]}}">
+                                      {{priceList.[0]}} - {{priceList.[1]}}
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="price" id="{{priceList.[1]}},{{priceList.[2]}}" onclick="queryParameter()">
+                                    <label class="form-check-label" for="{{priceList.[2]}}">
+                                      {{priceList.[1]}} - {{priceList.[2]}}
+                                    </label>
+                                  </div>
+                                  {{/if}}
+                                </div>
+                              </div>
+                            </div>
+                            {{!-- option-price : End --}}
+                            {{!-- option-price : Start --}}
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="flush-headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="true" aria-controls="flush-collapseFour">
+                                  Sorting
+                                </button>
+                              </h2>
+                              <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" >
+                                <div class="accordion-body partner-list">
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sorting" id="ASC" onclick="queryParameter()">
+                                    <label class="form-check-label" for="ASC">
+                                      Tăng dần
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sorting" id="DESC" onclick="queryParameter()">
+                                    <label class="form-check-label" for="DESC">
+                                      Giảm dần
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sorting" id="Total" onclick="queryParameter()">
+                                    <label class="form-check-label" for="Total">
+                                      Total purchase
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sorting" id="Total" onclick="queryParameter()">
+                                    <label class="form-check-label" for="Total">
+                                      Creation time
+                                    </label>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                            
+                            {{!-- option-price : End --}}
+
+                          </div>
+                        </div>
+                        <div class="row featured__filter">                        
+                            <div class="col-7" id="product">
+                              
+                              {{#each productList}}
+                              <div class="card" style="width: 15rem;">                                                         
+                                  <img src="{{productImageUrl}}" alt="{{productName}}">
+                                  <div class="product-body">
+        
+                                    <a href="product/detail/{{id}}" class="product-title">
+                                      {{productName}}
+                                      
+                                    </a>
+                                    <p class="product-price">
+                                      {{price}}đ
+                                    </p>                               
+                                  </div>
+                              
+                                    <div class="col-9 featured__item">                                                                   
+                                      <div class="featured__item__pic set-bg">
+                                        <ul class="featured__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>                                           
+                                        </ul>
+                                      </div>
+                                    </div>    
+                              {{!-- product-list : End --}}
+                                    {{!-- sort-list : Start --}}
+                                    <div class="col-2 sort-list"></div>
+                                    {{!-- sort-list : End --}}
+                              </div>
+                              {{/each}}
+                            </div>
                       </div>
-                
-                      
-         
-                  </div>
-               
-              </section>
-              <!-- Featured Section End -->
-            </div>
+                    </div>
+                </section>
+                <!-- Featured Section End -->
+              </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-
+  <div id="product-page" class="container">  
+    <ul class="page">
+      <li class="page__btn"><span class="material-icons">chevron_left</span></li>
+      <li class="page__numbers"> 1</li>
+      <li class="page__numbers active">2</li>
+      <li class="page__numbers">3</li>
+      <li class="page__numbers">4</li>
+      <li class="page__numbers">5</li>
+      <li class="page__numbers">6</li>
+      <li class="page__dots">...</li>
+      <li class="page__numbers"> 10</li>
+      <li class="page__btn"><span class="material-icons">chevron_right</span></li>
+    </ul>
+  </div>
 </main>
 
 
