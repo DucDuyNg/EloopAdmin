@@ -45,12 +45,13 @@ exports.getListProduct = async (req,res,next) =>{
     res.render('admins/product', {productList , partnerList ,catalogueList, priceList})
 }
 
-// exports.getProductDetail = async (req,res,next) =>{
-//     const productId = req.params.id
-//     if(productId !== undefined){
-//         const product = await findProduct(productId);
-//         const relativeProductList = await findRelativeProduct(productId);
-//         res.render('admins/detail',{product:product,relativeProductList:relativeProductList})
-//     }
-//     res.render('admins/detail')
-// }
+exports.getProductDetail = async (req,res,next) =>{
+    const productId = req.params.id
+    if(productId !== undefined){
+        const product = await findProduct(productId);
+        console.log("............................................")
+        const relativeProductList = await findRelativeProduct(productId);
+        res.render('admins/detail',{product:product,relativeProductList:relativeProductList})
+    }
+    res.render('admins/detail')
+}
