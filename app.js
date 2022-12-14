@@ -62,7 +62,7 @@ app.use('/admin', adminRouter);
 app.use('/product', productRouter);
 app.use('/recycle', recycleRouter);
 app.use('/distributor', distributorRouter);
-app.use('/profile', profileRouter);
+app.use('/admin-profile', profileRouter);
 app.use('/account-list', accountListRouter);
 app.use('/customer-order', customerOrderRouter);
 app.use('/product', detailRouter);
