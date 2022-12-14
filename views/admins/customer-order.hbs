@@ -1,17 +1,3 @@
-{{#if adminLogin}}
-<script type="text/javascript">
-window.onload = function() {
-    window.console.log(`admin ne `)
-    
-    let login = sessionStorage.getItem("isLogin");
-    window.console.log(login)
-    if(login === undefined || login === null){
-        window.location = "https://eloop-admin-hda.herokuapp.com/admin"
-    }
-    sessionStorage.setItem("isLogin", true);
-}
-</script> 
-{{/if }}
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -85,11 +71,11 @@ window.onload = function() {
 <main id="main" class="main">
 
   <div class="pagetitle">
-    <h1>Customer's Order</h1>
+    <h1>Customer's Orders</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-        <li class="breadcrumb-item active">Customer's Order</li>
+        <li class="breadcrumb-item active">Customer's Orders</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -100,8 +86,53 @@ window.onload = function() {
         <div class="row">
           <div class="col-12">
             <div class="card">
+              <section class="py-0 ux-section bg-light">
+                <div class="container mt-5 mb-5">
+                  <div class="row d-flex align-items-center justify-content-content">
+                      <h1 class="display-4 fw-bold mb-5 text-center">Order List</h1>
+                      
+                      <!-- List Order Account: Start -->
+                      <div class="col-12">
+                        <div class="card top-selling overflow-auto">
 
-              
+                          <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                              <li class="dropdown-header text-start">
+                                <h6>Filter</h6>
+                              </li>
+
+                              <li><a class="dropdown-item" href="#">Today</a></li>
+                              <li><a class="dropdown-item" href="#">This Month</a></li>
+                              <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                          </div>
+
+                          <div class="card-body pb-0">
+                            <h5 class="card-title">Order List <span>| Today</span></h5>
+
+                            <table class="table table-borderless">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Image</th>
+                                  <th scope="col">Product Name</th>
+                                  <th scope="col">Price</th>
+                                  <th scope="col">Username</th>
+                                  <th scope="col">Creatien Time</th>
+                                  <th scope="col">Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {{!-- Get element in models in here --}}
+                              </tbody>
+                            </table>
+
+                          </div>
+
+                        </div>
+                      </div><!-- List Order Account: End -->                       
+                </div>
+              </section>                             
             </div>
           </div>
         </div>
