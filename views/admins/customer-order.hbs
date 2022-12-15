@@ -122,7 +122,18 @@
                                   <th scope="col">Status</th>
                                 </tr>
                               </thead>
+                              Text 
                               <tbody>
+                                {{#each OrderList}}
+                                <tr>
+                                  
+                                  <th scope="row"><a href="#"><img src={{productImageUrl}} alt=""></a></th>
+                                  <td>{{productName}}</td>
+                                  <td>{{price}}</td>
+                                  <td class="fw-bold">{{name}}</td>
+                                  <td>{{createdAt}}</td>         
+                                </tr>
+                                {{/each}}
                                 {{!-- Get element in models in here --}}
                               </tbody>
                             </table>

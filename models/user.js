@@ -49,7 +49,7 @@ async function findUser(account){
   }
   return userInstance
 }
-findAllUser()
+//findAllUser()
 async function findAllUser(){
   const userInstance = await sequelize.query(`select id,createdAt from users`,
   {type: sequelize.QueryTypes.SELECT});
