@@ -1,4 +1,17 @@
 
+
+<script type="text/javascript">
+  window.onload = function() {
+    for (let i = 0; i < timeList.length; i++) {
+      const time =  timeList[i].innerHTML
+      const sliceLength = time.split(" ",4).length
+      {{!-- Tue Mar 29 2022 20:41:06 GMT+0700 (Indochina Time) --}}
+      timeList[i].innerHTML = time.slice(0,24);
+    }
+  }
+  
+</script> 
+
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -10,8 +23,6 @@
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
-
-    
 
     <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -87,6 +98,13 @@
           <div class="col-12">
             <div class="card">
               <section class="py-0 ux-section bg-light">
+                <div class="container mt-5 mb-5">
+                  <div class="row d-flex align-items-center justify-content-content">
+                      <h1 class="display-4 fw-bold mb-5 text-center">Account User List</h1>
+                      
+                      <!-- List User Account: Start -->
+                      <div class="col-12">
+                        <div class="card top-selling overflow-auto">
 
                           <div class="filter">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -96,8 +114,8 @@
                               </li>
 
                               <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
+                              <li><a class="dropdown-item" href="#">Name</a></li>
+                              <li><a class="dropdown-item" href="#">Email</a></li>
                             </ul>
                           </div>
 
@@ -121,7 +139,7 @@
                                   <td>{{account}}</td>
                                   <td>{{phone_number}}</td>
                                   <td class="fw-bold">{{number_product}}</td>
-                                  <td>{{createdAt}}</td>
+                                  <td class="date-time-createAt">{{createdAt}}</td>
                                 </tr>
                                 {{/each}}
                               </tbody>
@@ -133,7 +151,6 @@
                       </div><!-- List User Account: End -->                       
                 </div>
               </section>                             
-              
             </div>
           </div>
         </div>
