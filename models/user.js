@@ -48,6 +48,8 @@ async function findUser(account){
   }
   return userInstance
 }
+
+//findAllUser()
 async function findAllUser(){
   const userInstance = await user.findAll()
   console.log(userInstance)

@@ -1,17 +1,17 @@
 const {
       Order,
     findOrder,
+    findAllOrder,
     addOrder,
     removeOrder,
     getOrderList,
   } = require('../models/order')
   exports.getOrderList = async (req,res,next) =>{
-      const userId = req.params.userId
    
-      const OrderList = await getOrderList(1)
+      const OrderList = await getOrderList()
       console.log(OrderList.length);
    
-      res.render('admin/customer-order',{OrderList :OrderList})
+      res.render('admins/customer-order',{OrderList :OrderList})
   }
   exports.addToOrder = async (req,res,next) =>{
     const productId = req.params.id

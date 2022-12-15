@@ -7,8 +7,8 @@ const sellProductController = require('../customer-order/customerOrderController
 //       res.render('admins/customer-order');
 //     });
 
-router.get('/', sellProductController.getSellProductList);
-router.post('/:id', sellProductController.addToSellProduct);
+router.get('/', sellProductController.getOrderList);
+router.post('/:id', sellProductController.addToOrder);
 
 
 
