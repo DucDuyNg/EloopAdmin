@@ -31,6 +31,7 @@ const user = sequelize.define('user', {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
+  
 }, {
   // Other model options go here
 });
@@ -48,16 +49,17 @@ async function findUser(account){
   }
   return userInstance
 }
-
 //findAllUser()
 async function findAllUser(){
-  const userInstance = await user.findAll()
-  console.log(userInstance)
-  if (userInstance === null){
-    console.log('Not found!')
-  }else{
-    console.log('User is found!')
-  }
+  const userInstance = await sequelize.query(`select id,createdAt from users`,
+  {type: sequelize.QueryTypes.SELECT});
+  console.log(userInstance[0]["id"]);
+  console.log(userInstance[0]["createdAt"]);
+  // if (userInstance === null){
+  //   console.log('Not found!')
+  // }else{
+  //   console.log('User is found!')
+  // }
   return userInstance
 }
 
@@ -101,7 +103,7 @@ async function updateUser(name, account, password){
 }
 
 async function getAccountList(){
-  const accountList = await account.findAll()
+  const accountList = await user.findAll()
   if (accountList === null){
     console.log('account are not exists')
   }else{

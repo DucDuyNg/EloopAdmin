@@ -18,19 +18,29 @@ async function findOrder(id){
   }
   return sellOrderInstance
 }
-findAllOrder()
+//findAllOrder()
 async function findAllOrder(){
       const orderInstance = await sequelize.query(`   SELECT sellProducts.id,sellProducts.createdAt, productImageUrl, productName,price, name FROM sellProducts, users, products
                                                       WHERE sellProducts.productId = products.id
                                                       AND sellProducts.userId = users.id`,
                                                       {type: sequelize.QueryTypes.SELECT});
 
-      console.log(orderInstance[0]["id"]);
-      console.log(orderInstance[0]["createdAt"]);
-      console.log(orderInstance[0]["productImageUrl"]);
-      console.log(orderInstance[0]["productName"]);
-      console.log(orderInstance[0]["price"]);
-      console.log(orderInstance[0]["name"]);
+                                                  
+      // for (let index = 0; index < array.length; index++) {
+      //   const element = array[index];
+      //   orderInstance.forEach(element => {
+      //     element
+      //   });
+      // }
+      // orderInstance.forEach(element => {
+      //   console.log(element["productImageUrl"])
+      // });
+      // console.log(orderInstance[10]["id"]);
+      // console.log(orderInstance[10]["createdAt"]);
+      // console.log(orderInstance[10]["productImageUrl"]);
+      // console.log(orderInstance[10]["productName"]);
+      // console.log(orderInstance[10]["price"]);
+      // console.log(orderInstance[10]["name"]);
 
       return orderInstance
 }
