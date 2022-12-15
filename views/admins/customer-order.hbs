@@ -1,3 +1,17 @@
+{{#if adminLogin}}
+<script type="text/javascript">
+window.onload = function() {
+    window.console.log(`admin ne `)
+    
+    let login = sessionStorage.getItem("isLogin");
+    window.console.log(login)
+    if(login === undefined || login === null){
+        window.location = "https://eloop-admin-hda.herokuapp.com/admin"
+    }
+    sessionStorage.setItem("isLogin", true);
+}
+</script> 
+{{/if }}
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -71,11 +85,11 @@
 <main id="main" class="main">
 
   <div class="pagetitle">
-    <h1>Customer's Orders</h1>
+    <h1>Customer's Order</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-        <li class="breadcrumb-item active">Customer's Orders</li>
+        <li class="breadcrumb-item active">Customer's Order</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->

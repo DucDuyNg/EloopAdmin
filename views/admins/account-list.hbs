@@ -1,4 +1,17 @@
 
+
+<script type="text/javascript">
+  window.onload = function() {
+    for (let i = 0; i < timeList.length; i++) {
+      const time =  timeList[i].innerHTML
+      const sliceLength = time.split(" ",4).length
+      {{!-- Tue Mar 29 2022 20:41:06 GMT+0700 (Indochina Time) --}}
+      timeList[i].innerHTML = time.slice(0,24);
+    }
+  }
+  
+</script> 
+
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -10,8 +23,6 @@
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
-
-    
 
     <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -128,7 +139,7 @@
                                   <td>{{account}}</td>
                                   <td>{{phone_number}}</td>
                                   <td class="fw-bold">{{number_product}}</td>
-                                  <td>{{createdAt}}</td>
+                                  <td class="date-time-createAt">{{createdAt}}</td>
                                 </tr>
                                 {{/each}}
                               </tbody>
