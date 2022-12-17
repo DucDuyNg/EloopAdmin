@@ -1,0 +1,208 @@
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link " href="/admin">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="/product">
+              <i class="bi bi-circle"></i><span>Products</span>
+            </a>
+          </li>
+          <li>
+            <a href="/distributor">
+              <i class="bi bi-circle"></i><span>Distributors</span>
+            </a>
+          </li>
+          <li>
+            <a href="/recycle">
+              <i class="bi bi-circle"></i><span>Recycles</span>
+            </a>
+          </li>
+          
+        </ul>
+    </li><!-- End Components Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/account-list">
+        <i class="bi bi-person-circle"></i>
+        <span>Account List</span>
+      </a>
+    </li><!-- End Account List Nav -->
+    
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/customer-order">
+        <i class="bi bi-cart2"></i>
+        <span>Customer's Orders</span>
+      </a>
+    </li><!-- End Customer's Orders Nav -->
+
+    <li class="nav-heading">Pages</li>
+
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="pages-login.hbs">
+        <i class="bi bi-box-arrow-in-right"></i>
+        <span>Logout</span>
+      </a>
+    </li><!-- End Login Page Nav -->
+
+  </ul>
+
+</aside><!-- End Sidebar-->
+
+
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Add Product</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+        <li class="breadcrumb-item active">Add Product</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+  <section class="section dashboard">
+    <div class="row">
+      <!-- Left side columns -->
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+                  <section class="py-0 ux-section bg-light">
+                        <div class="container mt-5 mb-5">
+                              <div class="row d-flex align-items-center justify-content-content">
+                                    <div class="container tm-mt-big tm-mb-big">
+                                          <div class="row">
+                                                <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+                                                      <div class="tm-block tm-block-h-auto">
+                                                            <div class="row">
+                                                                  <div class="col-12">
+                                                                  <h1 class="display-4 fw-bold mb-5 text-center">Add Product</h1>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="row tm-edit-product-row">                                                
+                                                                  <div class="col-xl-6 col-lg-6 col-md-12">
+                                                                        <form action="" class="tm-edit-product-form"></form>
+                                                                              <div class="form-group mb-3">
+                                                                                    <label for="name">Product Name</label>
+                                                                                    <input id="name"name="name" type="text" class="form-control validate" required/>
+                                                                              </div>
+                                                                              <div class="form-group mb-3">
+                                                                                    <label for="name-partner">Partner</label>
+                                                                                    <input id="name-partner" name="name-partner" type="text" class="form-control validate" required/>
+                                                                              </div>
+                                                                              <div class="form-group mb-3">
+                                                                                    <label for="name-catalogue">Catalogue</label>
+                                                                                    <input id="name-catalogue" name="name-catalogue" type="text" class="form-control validate" required/>
+                                                                              </div>
+                                                                              <div class="form-group mb-3">
+                                                                                    <label for="description">Description</label>
+                                                                                    <textarea class="form-control validate" rows="3" required></textarea>
+                                                                              </div>
+                                                                              <div class="form-group mb-3">
+                                                                                    <label for="category">Category</label>
+                                                                                    <select class="custom-select tm-select-accounts" id="category">
+                                                                                          <option selected>Select category</option>
+                                                                                          <option value="1">New Arrival</option>
+                                                                                          <option value="2">Most Popular</option>
+                                                                                          <option value="3">Trending</option>
+                                                                                    </select>
+                                                                              </div>
+                                                                              <div class="row">
+                                                                                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                                                          <label for="expire_date">Expire Date</label>
+                                                                                          <input id="expire_date" name="expire_date" type="text" class="form-control validate" data-large-mode="true"/>                                                      
+                                                                                    </div>
+                                                                                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                                                                          <label for="stock">Price</label>
+                                                                                          <input id="stock" name="stock" type="text" class="form-control validate" required/>                                                     
+                                                                                    </div>
+                                                                              </div>
+                                                                              
+                                                                  </div>
+                                                                              <div class="col-xl-2 col-lg-6 col-md-12 mx-auto mb-4">
+                                                                              
+                                                                                          <div class="center">
+                                                                                                
+
+                                                                                                <div class="dropzone">
+                                                                                                      <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
+                                                                                                      <input type="file" class="upload-input" />
+                                                                                                </div>
+
+                                                                                                <button type="button" class="btn" name="uploadbutton">Upload file</button>
+
+                                                                                          </div>
+                                                                                    
+                                                                                    {{!-- <div class="tm-product-img-dummy mx-auto">
+                                                                                          <i
+                                                                                                class="bi bi-cloud-arrow-up-fill tm-upload-icon"
+                                                                                                onclick="document.getElementById('fileInput').click();"
+                                                                                          ></i>
+                                                                                    </div>
+                                                                                    <div class="custom-file mt-3 mb-3">
+                                                                                          <input id="fileInput" type="file" style="display:none;" />
+                                                                                          <input type="button" class="button-41 mx-auto" style="background-color:#11a683" value="Upload Product Image"                                                                                                    
+                                                                                                onclick="document.getElementById('fileInput').click();"
+                                                                                          />
+                                                                                    </div> --}}
+                                                                              </div>
+                                                                              <div class="col-12">
+                                                                                    <button type="submit" class="button-41 btn-block">Add Product Now</button>
+                                                                              </div>
+                                                                        </form>
+                                                                  
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>                       
+                        </div>
+                  </section>                             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/chart.js/chart.min.js"></script>
+<script src="assets/vendor/echarts/echarts.min.js"></script>
+<script src="assets/vendor/quill/quill.min.js"></script>
+<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+
+
+
+
+
