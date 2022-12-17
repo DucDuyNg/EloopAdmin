@@ -99,7 +99,7 @@ async function updateUser(name, account, password){
 }
 
 async function getAccountList(){
-  const accountList = await account.findAll()
+  const accountList = await user.findAll()
   if (accountList === null){
     console.log('account are not exists')
   }else{
