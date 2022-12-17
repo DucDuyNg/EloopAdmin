@@ -59,6 +59,7 @@ app.listen(port || 80, () => {
 // app.use('/', homeRouter);
 // app.use('/user', usersRouter);
 // app.use('/feedback', feedbackRouter);
+app.use('/', loginRouter);
 app.use('/login', loginRouter);
 app.use('/admin', adminRouter);
 app.use('/product', productRouter);

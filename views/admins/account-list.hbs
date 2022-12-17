@@ -1,7 +1,11 @@
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+
   window.onload = function() {
+    const timeList = document.getElementsByClassName("date-time-createAt")
     for (let i = 0; i < timeList.length; i++) {
       const time =  timeList[i].innerHTML
       const sliceLength = time.split(" ",4).length
@@ -9,6 +13,26 @@
       timeList[i].innerHTML = time.slice(0,24);
     }
   }
+
+  function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+  $(document).ready(function(){
+    $("#filter").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#admin-content tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  function sortTable(){
+    var mylist = $('#admin-content');
+    var listitems = mylist.children('tr').get();
+    listitems.sort(function(a, b) {
+      return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+    })
+    $.each(listitems, function(idx, itm) { mylist.append(itm); });
+  }
+
+
   
 </script> 
 
@@ -90,6 +114,11 @@
       </ol>
     </nav>
   </div><!-- End Page Title -->
+
+
+  <form action="account-list/filter" method="get" id="account-list-query-form">
+    
+  </form>
   <section class="section dashboard">
     <div class="row">
       <!-- Left side columns -->
@@ -105,20 +134,24 @@
                       <!-- List User Account: Start -->
                       <div class="col-12">
                         <div class="card top-selling overflow-auto">
-
                           <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                              </li>
 
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">Name</a></li>
-                              <li><a class="dropdown-item" href="#">Email</a></li>
-                            </ul>
+
+
+                              <div class="input-group">
+                                <button class="btn btn-secondary" form="account-list-query-form" type="submit">Filter</button>
+                                <input type="text" id="filter"  class="form-control" placeholder="Search..">
+                                
+                              </div>
+                              {{!-- <select class="form-select" id="sort" name="sort" form="account-list-query-form" onclick="sortTable()"  >
+                                <option selected>Sort</option>
+                                <option  value="email" id="sort-email" onselect="sortTable()">Email</option>
+                                <option onclick="sortTable()" value="name">Name</option>
+                                <option onclick="sortTable("date")" value="date">Date</option>
+                                <option onclick="sortTable("bought")" value="bought">Bought</option>
+                              </select> --}}
                           </div>
-
+                          
                           <div class="card-body pb-0">
                             <h5 class="card-title">User List <span>| Today</span></h5>
 
@@ -126,17 +159,19 @@
                               <thead>
                                 <tr>
                                   <th scope="col">Image</th>
-                                  <th scope="col">Email</th>
+                                  <th scope="col" type="button" onclick="sortTable()">Email</th>
+                                  <th scope="col">Name</th>
                                   <th scope="col">Phone Number</th>
                                   <th scope="col">Bought</th>
                                   <th scope="col">Create At</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody id="admin-content">
                                 {{#each accountList}}
                                 <tr>
                                   <th scope="row"><a href="#"><img src="../images/D.jpg" alt=""></a></th>
                                   <td>{{account}}</td>
+                                  <td>{{name}}</td>
                                   <td>{{phone_number}}</td>
                                   <td class="fw-bold">{{number_product}}</td>
                                   <td class="date-time-createAt">{{createdAt}}</td>
@@ -157,8 +192,11 @@
       </div>
     </div>
   </section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 </main>
 <!-- End #main -->
+
 
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
