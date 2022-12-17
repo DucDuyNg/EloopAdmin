@@ -14,7 +14,8 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #11a683;
+  background-color: #74F2CE; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, #74F2CE, #7CFFCB);
   color: #444444;
 }
 
