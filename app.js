@@ -24,6 +24,8 @@ const accountListRouter = require('./account-list/accountListRouter');
 const customerOrderRouter = require('./customer-order/customerOrderRouter');
 const detailRouter = require('./products/detailRouter');
 
+const addProductRouter = require('./routes/add-product');
+
 const app = express();
 let port = process.env.PORT || 80
 
@@ -67,6 +69,8 @@ app.use('/admin-profile', profileRouter);
 app.use('/account-list', accountListRouter);
 app.use('/customer-order', customerOrderRouter);
 app.use('/product', detailRouter);
+
+app.use('/add-product', addProductRouter);
 // app.use('/charity', charityRouter);
 
 

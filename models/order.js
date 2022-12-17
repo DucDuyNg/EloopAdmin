@@ -18,6 +18,32 @@ async function findOrder(id){
   }
   return sellOrderInstance
 }
+//findAllOrder()
+async function findAllOrder(){
+      const orderInstance = await sequelize.query(`   SELECT sellProducts.id,sellProducts.createdAt, productImageUrl, productName,price, name FROM sellProducts, users, products
+                                                      WHERE sellProducts.productId = products.id
+                                                      AND sellProducts.userId = users.id`,
+                                                      {type: sequelize.QueryTypes.SELECT});
+
+                                                  
+      // for (let index = 0; index < array.length; index++) {
+      //   const element = array[index];
+      //   orderInstance.forEach(element => {
+      //     element
+      //   });
+      // }
+      // orderInstance.forEach(element => {
+      //   console.log(element["productImageUrl"])
+      // });
+      // console.log(orderInstance[10]["id"]);
+      // console.log(orderInstance[10]["createdAt"]);
+      // console.log(orderInstance[10]["productImageUrl"]);
+      // console.log(orderInstance[10]["productName"]);
+      // console.log(orderInstance[10]["price"]);
+      // console.log(orderInstance[10]["name"]);
+
+      return orderInstance
+}
 
 async function addOrder(userId,productId){
   //   INSERT INTO admins(id, name, account, password, createdAt, updatedAt) VALUES
@@ -55,24 +81,20 @@ async function removeOrder(id){
 
 
 
-async function getOrderList(userId){
-   const productInstance = await sequelize.query(`SELECT * FROM sellProducts,products WHERE userId = "${userId}" and sellProducts.productId = products.id`, 
-    { type: sequelize.QueryTypes.SELECT
-        ,model : product
-   });
-    //    console.log(productInstance);     
-    //    console.log(productInstance.length);       
-  if (productInstance === null){
-    console.log('list empty')
-  }else{
-    console.log('List Product is built!')
-  }
-  return productInstance
+async function getOrderList(){
+      const orderList = await findAllOrder()
+      if (orderList === null){
+      console.log('account are not exists')
+      }else{
+      console.log('account list is built!')
+      }
+      return orderList
 }
 // getOrderList(1);
 module.exports = {
     Order,
   findOrder,
+  findAllOrder,
   addOrder,
   removeOrder,
   getOrderList,

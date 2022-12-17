@@ -3,6 +3,7 @@ exports.getAccountList = async (req,res,next) =>{
     const accountList = await getAccountList();
     console.log(accountList.length);
 
+
     res.render('admins/account-list', {accountList : accountList})
 }
 
@@ -15,3 +16,4 @@ exports.getFillterAccountList = async (req,res,next) =>{
 
     res.render('admins/account-list', {accountList : accountList})
 }
+

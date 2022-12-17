@@ -1,10 +1,12 @@
 /* CSS */
 .button-41 {
-  background-color: initial;
-  background-image: linear-gradient(-180deg, white, white);
+  /* background-color: initial;
+  background-image: linear-gradient(-180deg, white, white); */
+  background-color: #74F2CE; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, #74F2CE, #7CFFCB);
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-  color: #11a683;
+  color: black;
   cursor: pointer;
   display: inline-block;
   height: 36px;
@@ -26,8 +28,8 @@
   font-family: Arial, Helvetica, sans-serif; }
 
 .button-41:hover {
-  background: #11a683;
-  color: white; }
+  background: #ffffff;
+  color: black; }
 
 :root {
   --primary: #23adad;
