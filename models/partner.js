@@ -2,6 +2,11 @@ const { sequelize,DataTypes } = require('../config/db');
 
 const partner = sequelize.define('partner', {
   // Model attributes are defined here
+  id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false
@@ -25,6 +30,18 @@ async function findPartner(account){
     console.log('partner is found!')
   }
   return partnerInstance
+}
+
+findPartnerIdByName('Future Space Explore Co.')
+async function findPartnerIdByName(name){
+  const partnerInstance = await partner.findOne({where : {name:name}})
+  console.log(partnerInstance.id)
+  if (partnerInstance === null){
+    console.log('Not found!')
+  }else{
+    console.log('Partner is found!')
+  }
+  return partnerInstance.id
 }
 
 async function addPartner(name, account, password){
@@ -57,4 +74,4 @@ async function getPartnerList(){
   }
   return partnerList
 }
-module.exports = {partner,findPartner,addPartner,removePartner,getPartnerList}
+module.exports = {partner,findPartner,findPartnerIdByName,addPartner,removePartner,getPartnerList}

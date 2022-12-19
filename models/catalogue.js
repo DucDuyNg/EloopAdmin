@@ -2,10 +2,16 @@ const { sequelize,DataTypes } = require('../config/db');
 
 const catalogue = sequelize.define('catalogue', {
   // Model attributes are defined here
+  id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false
   },
+  
 }, {
   // Other model options go here
 });
@@ -21,6 +27,30 @@ async function findCatalogue(account){
     console.log('catalogue is found!')
   }
   return catalogueInstance
+}
+findCatalogueIdByName('THỰC PHẨM HỮU CƠ')
+async function findCatalogueIdByName(name){
+  const catalogueInstance = await catalogue.findOne({where : {name:name}})
+  console.log(catalogueInstance.id)
+  if (catalogueInstance === null){
+    console.log('Not found!')
+  }else{
+    console.log('catalogue is found!')
+  }
+  return catalogueInstance.id
+}
+
+async function findCatalogueIdByName2(){
+  const userInstance = await sequelize.query(`select id,name from catalogues`,
+  {type: sequelize.QueryTypes.SELECT});
+  console.log(userInstance[0]["id"]);
+  console.log(userInstance[0]["name"]);
+  // if (userInstance === null){
+  //   console.log('Not found!')
+  // }else{
+  //   console.log('User is found!')
+  // }
+  return userInstance
 }
 
 async function addCatalogue(name, account, password){
@@ -54,4 +84,4 @@ async function getCatalogueList(){
   }
   return catalogueList
 }
-module.exports = {catalogue,findCatalogue,addCatalogue,removeCatalogue,getCatalogueList}
+module.exports = {catalogue,findCatalogue,findCatalogueIdByName,addCatalogue,removeCatalogue,getCatalogueList}
