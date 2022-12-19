@@ -1,5 +1,6 @@
 const { sequelize,DataTypes } = require('../config/db');
 const { partner } = require('./partner');
+//const { catalogue } = require('./catalogue');
 
 const product = sequelize.define('product', {
   // Model attributes are defined here
@@ -18,15 +19,27 @@ const product = sequelize.define('product', {
   description: {
     type: DataTypes.STRING(3000),
     allowNull: true
-  }
+  },
+  catalogueId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true
+  },
+  partnerId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true
+  },
+  
 }, {
   // Other model options go here
 });
 
-
+//findProduct('10')
 console.log(product === sequelize.models.product); // true
-async function findProduct(id){
-  const productInstance = await product.findOne({where : {id:id}})
+async function findProduct(productName){
+  const productInstance = await product.findOne({where : {productName:productName}})
+  //console.log(productInstance.id)
   if (productInstance === null){
     console.log('Not found!')
   }else{
@@ -34,6 +47,22 @@ async function findProduct(id){
   }
   return productInstance
 }
+
+//findProduct('10')
+async function findProductById(id){
+  const productInstance = await product.findOne({where : {id:id}})
+  console.log(productInstance.productName)
+  if (productInstance === null){
+    console.log('Not found!')
+  }else{
+    console.log('product is found!')
+  }
+  return productInstance
+}
+
+
+
+
 
 async function findRelativeProduct(id){
   const sizeRelativeProduct = 4
@@ -54,10 +83,13 @@ async function findRelativeProduct(id){
   }
   return listRelativeProduct
 }
-async function addProduct(productImageUrl, productName, price,description){
-  const existProduct = await findProduct(account)
+//addProduct()
+async function addProduct(productImageUrl, productName, price,description,createdAt,partnerId,catalogueId){
+  //console.log(partnerId)
+  //const productInstance = product.create({productImageUrl: productImageUrl, productName: productName, price: price, description : description, createdAt:createdAt, partnerId:partnerId, catalogueId:catalogueId})
+  const existProduct = await findProduct(productName)
   if(existProduct === null){
-    const productInstance = product.create({productImageUrl: productImageUrl, productName: productName, price: price, description : description})
+    const productInstance = product.create({productImageUrl: productImageUrl, productName: productName, price: price, description : description, createdAt:createdAt, partnerId:partnerId, catalogueId:catalogueId})
     console.log('Product is added!')
   }
   else {
@@ -66,6 +98,7 @@ async function addProduct(productImageUrl, productName, price,description){
 }
 
 async function removeProduct(id){
+  productName = 'Test Product'
   const productInstance = await findProduct(id)
   if(productInstance === null){
     console.log('Product is not exist!')
@@ -276,6 +309,7 @@ async function searchProduct(key){
 module.exports = {
   product,
   findProduct,
+  findProductById,
   addProduct,
   removeProduct,
   getProductList,

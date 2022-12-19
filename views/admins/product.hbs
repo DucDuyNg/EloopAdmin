@@ -317,25 +317,30 @@
                                 </p>                               
                               </div>
                           
-                              <div class="col-10 featured__item">                                                                   
-                                <div class="featured__item__pic set-bg">
-                                  <ul class="featured__item__pic__hover">
-                                      <li><a href="#"><i class="bi bi-info-lg"></i></a></li>
-                                                                                
-                                  </ul>
-                                </div>
-                              </div>   
+                              {{!-- <form action="/update-product/{{id}}" method="post">
+                                <div class="col-10 featured__item">                                                                   
+                                  <div class="featured__item__pic set-bg">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="/update-product/{{id}}"><i class="bi bi-info-lg"></i></a></li>
+                                                                                  
+                                    </ul>
+                                  </div>
+                                </div>  
+                              </form>  --}}
+                              
 
-                              <form action="/order/{{id}}" method="post">
-          <button class="learn-more">
-            <a href="#">
-                <span class="circle" aria-hidden="true">
-                    <span class="icon arrow"></span>
-                </span>
-                <span class="button-text">Mua</span>
-            </a>
-          </button>
-        </form> 
+                              
+                              
+                                <button class="learn-more">
+                                  <a href="product/update-product/{{id}}" class="product-title">
+                                      <span class="circle" aria-hidden="true">
+                                          <span class="icon arrow"></span>
+                                      </span>
+                                      <span class="button-text">Details</span>
+                                  </a>
+                                 
+                                </button>
+                              
 
                           {{!-- product-list : End --}}
                                 

@@ -1,7 +1,9 @@
 const { Sequelize,DataTypes } = require('sequelize');
 
 
-//const sequelize = new Sequelize('Eloop', 'root', 'tyuio1234@', {
+// const sequelize = new Sequelize('Eloop', 'root', '*Duynguyen18050210@', {
+//     dialect:'mysql',
+// });
 
 const sequelize = new Sequelize('heroku_b81a1d522329301', 'bc78da768c9b0e', '2476055f', {
     host: 'us-cdbr-east-06.cleardb.net',
