@@ -13,4 +13,5 @@ router.get('/:expore', productController.getListProductQueryParam);
 
 //router.get('/', productController.showUpdateProduct);
 router.get('/update-product/:id', productController.showUpdateProduct);
+router.get('/remove/:id', productController.removeProduct);
 module.exports = router;

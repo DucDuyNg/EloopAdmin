@@ -100,31 +100,44 @@
                                                                  
                                                                         <div class="row tm-edit-product-row">                                                
                                                                               <div class="col-xl-6 col-lg-6 col-md-12">
-                                                                                    {{#each product}}
+                                                                                    {{#with product}}
+                                                                                          
                                                                                           <form action="" class="tm-edit-product-form">
                                                                                                 <div class="form-group mb-3">
-                                                                                                      <label for="product_name">{{productName}}</label>
-                                                                                                      <input id="product_name"name="product_name" type="text" class="form-control validate" value="{{product_name}}" required/>
+                                                                                                      <label for="product_name">Product name</label>
+                                                                                                      <input id="product_name"name="product_name" type="text" class="form-control validate" value="{{productName}}" required/>
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
-                                                                                                      <label for="id_partner">{{partnerId}}</label>
-                                                                                                      <input id="id_partner" name="id_partner" type="text" class="form-control validate" value="{{id_partner}}" required/>
+                                                                                                      <label for="id_partner">Partner Id</label>
+                                                                                                      <input id="id_partner" name="id_partner" type="text" class="form-control validate" value="{{partnerId}}" required/>
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
-                                                                                                      <label for="name_catalogue">Catalogue</label>
-                                                                                                      <input id="name_catalogue" name="name_catalogue" type="text" class="form-control validate" required/>
+                                                                                                      <label for="name_catalogue">Catalogue Id</label>
+                                                                                                      <input id="name_catalogue" name="name_catalogue" type="text" class="form-control validate" value="{{catalogueId}}" required/>
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
-                                                                                                      <label for="description">{{description}}</label>
+                                                                                                      <label for="description">Description</label>
                                                                                                       <textarea id="description" name="description" class="form-control validate" rows="3" value="{{description}}" required></textarea>
                                                                                                 </div>
-                                                                                                <div class="form-group mb-3">
+                                                                                                <div class="form-group mb-2">                                                                                               
+                                                                                                      <label for="name_partner">Partner</label>
+                                                                                                      <select id="name_partner" name="name_partner" class="custom-select tm-select-accounts" id="partner" style="margin-left:10px">
+                                                                                                            <option selected>Select partner</option>
+                                                                                                            {{#each partnerList}}      
+                                                                                                                  
+                                                                                                                  <option  value="{{name}}">{{name}}</option>
+                                                                                                            
+                                                                                                            {{/each}}
+                                                                                                      </select>
                                                                                                       
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">                                                                                               
                                                                                                       <label for="category">Category</label>
-                                                                                                      <select class="custom-select tm-select-accounts" id="category">
+                                                                                                      <select id="catalogue_id" name="name_catagory" class="custom-select tm-select-accounts" id="category">
                                                                                                             <option selected>Select category</option>
-                                                                                                            {{#each catalogueList}}               
-                                                                                                            <option name="catalogue_id" value="{{id}}">{{name}}</option>
+                                                                                                            {{#each catalogueList}}      
+                                                                                                                  
+                                                                                                                  <option  value="{{name}}">{{name}}</option>
                                                                                                             
                                                                                                             {{/each}}
                                                                                                       </select>
@@ -133,8 +146,8 @@
                                                                                           
                                                                                                 <div class="row">
                                                                                                       <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                                                                                            <label for="expire_date">{{createdAt}}</label>
-                                                                                                            <input id="expire_date" name="expire_date" type="text" class="form-control validate" data-large-mode="true" value="{{expire_date}}"/>                                                      
+                                                                                                            <label for="expire_date">Creation Time</label>
+                                                                                                            <input id="expire_date" name="expire_date" type="text" class="form-control validate" data-large-mode="true" value="{{createdAt}}"/>                                                      
                                                                                                       </div>
                                                                                                       <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                                                                             <label for="price">Price</label>
@@ -146,41 +159,58 @@
                                                                                                 <div class="col-xl-2 col-lg-6 col-md-12 mx-auto mb-4">
                                                                                                 
                                                                                                       <div class="center">
-                                                                                                            
-
                                                                                                             <div class="dropzone">
-                                                                                                                  <img src="{{productImageUrl}}" class="upload-icon" />
-                                                                                                                  <input type="file" id="upload_image" class="upload_image" value="{{upload_image}}" />
+                                                                                                                  
+                                                                                                                  <form method="POST" action="/upload_image" enctype="multipart/form-data">
+                                                                                                                        <label class="customUpload btnUpload btnM" style="padding: 2px 2px;"> 
+                                                                                                                              <img src="{{productImageUrl}}" class="upload-icon" />
+                                                                                                                              <input type="file" id="image" name="image" class="image" value="{{image}}" />
+                                                                                                                              
+                                                                                                                        </label>
+                                                                                                                                                                                                                        
+                                                                                                                  </form>
                                                                                                             </div>
 
-                                                                                                            <button type="button" class="btn" name="uploadbutton">Upload file</button>
+                                                                                                            {{!-- <button type="button" class="btn" name="uploadbutton">Upload file</button> --}}
 
                                                                                                       </div>
                                                                                                       
-                                                                                                      {{!-- <div class="tm-product-img-dummy mx-auto">
-                                                                                                            <i
-                                                                                                                  class="bi bi-cloud-arrow-up-fill tm-upload-icon"
-                                                                                                                  onclick="document.getElementById('fileInput').click();"
-                                                                                                            ></i>
-                                                                                                      </div>
-                                                                                                      <div class="custom-file mt-3 mb-3">
-                                                                                                            <input id="fileInput" type="file" style="display:none;" />
-                                                                                                            <input type="button" class="button-41 mx-auto" style="background-color:#11a683" value="Upload Product Image"                                                                                                    
-                                                                                                                  onclick="document.getElementById('fileInput').click();"
-                                                                                                            />
-                                                                                                      </div> --}}
+                                                                                                      
                                                                                                 </div>
                                                                                                 <div class="col-12">
                                                                                                       <button type="submit" class="button-41 btn-block" >Update Product Now</button>
+                                                                                                      
                                                                                                 </div>
                                                                                           </form>
-                                                                                    {{/each}}
+                                                                                    {{/with}}
                                                                               
                                                                               
                                                                         </div>
                                                                   
                                                             </form>
                                                       </div>
+
+                                                      <div class="tm-block tm-block-h-auto">
+                                                            {{#with product}}
+                                                                  {{!-- <form method="GET" action="/{{id}}/remove-product" class="remove-product">
+                                                                        
+                                                                        <button type="submit" name="remove_id" class="button-41 btn-block" value="{{id}}" >Remove</button>
+                                                                        
+                                                                  </form> --}}
+                                                                  <button class="learn-more">
+                                                                        <a href="/product/remove/{{id}}" class="button-41 btn-block">
+                                                                              <span class="circle" aria-hidden="true">
+                                                                                    <span class="icon arrow"></span>
+                                                                              </span>
+                                                                              <span class="button-text">Remove</span>
+                                                                        </a>
+                                                                        
+                                                                  </button>
+                                                            {{/with}}
+                                                            
+                                                      </div>
+                                                            
+                                                    
                                                 </div>
                                           </div>
                                     </div>
@@ -199,6 +229,12 @@
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
     class="bi bi-arrow-up-short"></i></a>
+
+{{!-- <script>
+      function remove_product(productId) { // This will be called on click and passed the user's _id
+            $.post('remove/user/'+ productId) // This calls the server. Todo : add a callback, etc.
+      }
+</script> --}}
 
 <!-- Vendor JS Files -->
 <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

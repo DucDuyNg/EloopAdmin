@@ -1,13 +1,17 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 const productController = require('./productController')
 
-router.get('/', productController.showUpdateProduct);
-//router.post('/', productController.showUpdateProduct);
-//router.get('/:expore/:id', productController.showUpdateProduct);
-//router.post('/:expore', productController.showUpdateProduct);
-//router.get('/', productController.updateProduct);
+router.use('/assets', express.static(path.resolve(__dirname + 'assets')));
+
+// router.get('/*', (req, res)=>{
+//      res.sendFile(path.resolve('www', 'up'));
+// });
+router.get(path.resolve('/'), productController.showUpdateProduct);
 router.post('/', productController.updateProduct);
+
+
 
 
 

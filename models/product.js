@@ -4,6 +4,11 @@ const { partner } = require('./partner');
 
 const product = sequelize.define('product', {
   // Model attributes are defined here
+  id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true
+  },
   productImageUrl:{
       type: DataTypes.STRING,
       allowNull: false
@@ -61,9 +66,6 @@ async function findProductById(id){
 }
 
 
-
-
-
 async function findRelativeProduct(id){
   const sizeRelativeProduct = 4
   const catalogue = await sequelize.query(`SELECT catalogueId FROM products WHERE id = ${id}`, 
@@ -96,10 +98,10 @@ async function addProduct(productImageUrl, productName, price,description,create
     console.log('Product is exist!')
   }
 }
-
+//removeProduct('74')
 async function removeProduct(id){
   productName = 'Test Product'
-  const productInstance = await findProduct(id)
+  const productInstance = await findProductById(id)
   if(productInstance === null){
     console.log('Product is not exist!')
   }

@@ -22,10 +22,11 @@ const distributorRouter = require('./distributors/distributorRouter');
 const profileRouter = require('./profile/profileRouter');
 const accountListRouter = require('./account-list/accountListRouter');
 const customerOrderRouter = require('./customer-order/customerOrderRouter');
-const detailRouter = require('./products/detailRouter');
+//const detailRouter = require('./products/detailRouter');
 
 const addProductRouter = require('./products/addProductRouter');
 const updateProductRouter = require('./products/updateProductRouter');
+//const removeProductRouter = require('./products/removeProductRouter');
 const app = express();
 let port = process.env.PORT || 80
 
@@ -37,8 +38,6 @@ app.engine('.hbs', handlebars.engine({
 }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.hbs');
-
-
 
 
 app.use(logger('dev'));
@@ -68,7 +67,7 @@ app.use('/distributor', distributorRouter);
 app.use('/admin-profile', profileRouter);
 app.use('/account-list', accountListRouter);
 app.use('/customer-order', customerOrderRouter);
-app.use('/product', detailRouter);
+//app.use('/:id/remove-product', removeProductRouter);
 
 app.use('/add-product', addProductRouter);
 app.use('/update-product/:id', updateProductRouter);
