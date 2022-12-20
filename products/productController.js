@@ -1,6 +1,7 @@
 const {product,findProduct,findProductById,addProduct,removeProduct,getProductList,findRelativeProduct,getPriceList} = require('../models/product')
 const {partner,findPartner,findPartnerIdByName,addPartner,removePartner,getPartnerList} = require('../models/partner')
 const {catalogue,findCatalogue,findCatalogueIdByName,addCatalogue,removeCatalogue,getCatalogueList} = require('../models/catalogue')
+
 exports.getListProductQueryParam = async (req,res,next) =>{
     const partnerId = req.query.partner
     console.log(req.query.partner);
@@ -123,8 +124,8 @@ exports.addNewProduct = async (req,res, next) =>{
 }
 
 exports.showUpdateProduct = async(req, res, next) => {
-    console.log(req.body)
-    console.log(req.params)
+    // console.log(req.body)
+    // console.log(req.params)
 
     const productId = req.params.id
     console.log(productId)
@@ -134,7 +135,7 @@ exports.showUpdateProduct = async(req, res, next) => {
 
     if(productId !== undefined){
         const product = await findProductById(productId);
-        console.log("............................................")
+        //console.log("............................................")
         const relativeProductList = await findRelativeProduct(productId);
         res.render('admins/update-product',{product,relativeProductList, catalogueList})
     }
@@ -175,4 +176,21 @@ exports.updateProduct = async (req,res, next) =>{
     
     res.render('/admins/add-product',{productList,catalogueList}) 
 
+}
+
+exports.removeProduct = async (req,res,next) =>{
+    const productId = req.params.id
+    console.log("Product ID:")
+    console.log(productId)
+    
+    
+    if(productId !== undefined){
+       
+        console.log("............................................")
+        await removeProduct(productId);
+        
+        
+        res.render('admins/product')
+    }
+    //res.render('admins/product')
 }
