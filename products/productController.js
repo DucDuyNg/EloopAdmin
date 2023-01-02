@@ -1,4 +1,4 @@
-const {product,findProduct,findProductById,addProduct,removeProduct,getProductList,findRelativeProduct,getPriceList} = require('../models/product')
+const {product,findProduct,findProductById,addProduct,removeProduct,getProductList,findRelativeProduct, updateProduct,getPriceList} = require('../models/product')
 const {partner,findPartner,findPartnerIdByName,addPartner,removePartner,getPartnerList} = require('../models/partner')
 const {catalogue,findCatalogue,findCatalogueIdByName,addCatalogue,removeCatalogue,getCatalogueList} = require('../models/catalogue')
 
@@ -124,26 +124,29 @@ exports.addNewProduct = async (req,res, next) =>{
 }
 
 exports.showUpdateProduct = async(req, res, next) => {
-    // console.log(req.body)
-    // console.log(req.params)
+    console.log(".....................")
 
     const productId = req.params.id
     console.log(productId)
+
+    const partnerId = ""
+    console.log(req.query.partner);
+
     const catalogue = ""
-    //console.log(req.query.catalogue);
+    console.log(req.query.catalogue);
+
+    const partnerList = await getPartnerList(partnerId);
     const catalogueList = await getCatalogueList(catalogue);
 
     if(productId !== undefined){
         const product = await findProductById(productId);
-        //console.log("............................................")
-        const relativeProductList = await findRelativeProduct(productId);
-        res.render('admins/update-product',{product,relativeProductList, catalogueList})
+       
+        res.render('admins/update-product',{product, catalogueList,partnerList})
     }
-
-    
 
     //res.render('admins/update-product',{catalogueList});
 }
+
 exports.updateProduct = async (req,res, next) =>{
     const productName = req.body.product_name
     const partnerId = req.body.id_partner
@@ -151,8 +154,8 @@ exports.updateProduct = async (req,res, next) =>{
     const catalogueId = req.body.name_catagory
     const CreationTime = req.body.expire_date
     const price = req.body.price
-    //const imageProduct = req.body.upload_image
-    const imageProduct = '/images/D.jpg'
+    const imageProduct = req.body.upload_image
+    //const imageProduct = '/images/D.jpg'
     console.log(productName,partnerId ,
         description, 
         catalogueId ,
@@ -172,7 +175,7 @@ exports.updateProduct = async (req,res, next) =>{
 
     // const catalogueList = await getCatalogueList(catalogue);
     // const partnerList = await getPartnerList(partnerId);
-    const productList = await addProduct(imageProduct, productName, price,description,CreationTime,partnerId,catalogueId);
+    const productList = await updateProduct(imageProduct, productName, price,description,CreationTime,partnerId,catalogueId);
     
     res.render('/admins/add-product',{productList,catalogueList}) 
 

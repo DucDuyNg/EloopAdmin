@@ -125,7 +125,7 @@
                                                                                                             <option selected>Select partner</option>
                                                                                                             {{#each partnerList}}      
                                                                                                                   
-                                                                                                                  <option  value="{{name}}">{{name}}</option>
+                                                                                                                  <option  value="">{{name}}</option>
                                                                                                             
                                                                                                             {{/each}}
                                                                                                       </select>
@@ -137,7 +137,7 @@
                                                                                                             <option selected>Select category</option>
                                                                                                             {{#each catalogueList}}      
                                                                                                                   
-                                                                                                                  <option  value="{{name}}">{{name}}</option>
+                                                                                                                  <option  value="">{{name}}</option>
                                                                                                             
                                                                                                             {{/each}}
                                                                                                       </select>
@@ -192,21 +192,22 @@
 
                                                       <div class="tm-block tm-block-h-auto">
                                                             {{#with product}}
-                                                                  {{!-- <form method="GET" action="/{{id}}/remove-product" class="remove-product">
-                                                                        
-                                                                        <button type="submit" name="remove_id" class="button-41 btn-block" value="{{id}}" >Remove</button>
-                                                                        
-                                                                  </form> --}}
-                                                                  <button class="learn-more">
-                                                                        <a href="/product/remove/{{id}}" class="button-41 btn-block">
+                                                            <form method="POST" action="/product/remove/{{id}}" class="remove-product">
+                                                                  
+                                                                  <button type="submit" name="remove_id" class="button-41 btn-block" value="" >Remove</button>
+                                                                        {{!-- <button class="learn-more">
+                                                                        <a href="" class="button-41 btn-block">
                                                                               <span class="circle" aria-hidden="true">
                                                                                     <span class="icon arrow"></span>
                                                                               </span>
                                                                               <span class="button-text">Remove</span>
-                                                                        </a>
-                                                                        
+                                                                        </a> --}}
+                                                                         
                                                                   </button>
+                                                                  
+                                                            </form>
                                                             {{/with}}
+                                                            
                                                             
                                                       </div>
                                                             
