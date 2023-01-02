@@ -101,14 +101,5 @@
   border-radius: 0;
   border-bottom: 2px solid #eee;
 } */
-
-#header .userAuthen {
-  margin-left: 550px; }
-
-#header .caret.caret-up {
-  border-top-width: 0;
-  border-bottom: 1px solid white; }
-
-
 /* <div id="btn"><span class="noselect">Đăng nhập</span><div id="circle"></div></div>
 <div id="btn-signup"><span class="noselect2">Đăng kí</span><div id="circle2"></div></div> */

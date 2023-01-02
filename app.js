@@ -27,12 +27,17 @@ const customerOrderRouter = require('./customer-order/customerOrderRouter');
 const addProductRouter = require('./products/addProductRouter');
 const updateProductRouter = require('./products/updateProductRouter');
 //const removeProductRouter = require('./products/removeProductRouter');
+
+var paginate = require('handlebars-paginate');
 const app = express();
 let port = process.env.PORT || 80
 
 // view engine setup
 app.engine('.hbs', handlebars.engine({
   extname: '.hbs',
+  helpers: {
+    paginate : (paginate)
+  },
   runtimeOptions:{allowProtoPropertiesByDefault:true,
   allowedProtoMethodsByDefault:true}
 }));
