@@ -17,8 +17,8 @@
 
 .center {
   position: absolute;
-  top: 43%;
-  left: 70%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 300px;
   height: 260px;
@@ -26,7 +26,7 @@
   box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
   background: #fff;
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
 }
@@ -53,13 +53,10 @@ h1 {
 }
 
 .upload-icon {
-  margin-right:230px;
-  margin-top:-93px;
-  width:300px;
-  height:260px
+  margin: 25px 2px 2px 2px;
 }
 
-.upload_image {
+.upload-input {
   position: relative;
   top: -62px;
   left: 0;
@@ -84,5 +81,5 @@ h1 {
 
 .btn:hover {
   background: rebeccapurple;
-  box-shadow: 0 3px 0 0 #11a683;
+  box-shadow: 0 3px 0 0 deeppink;
 }
