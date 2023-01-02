@@ -286,16 +286,26 @@
                             <p class="product-price">
                               {{price}}đ
                             </p>
-                            <form action="/shopping-cart/{{id}}" method="post">
+                            {{!-- <form action="/shopping-cart/{{id}}" method="post">
                               <button class="learn-more" onclick="addToCartSuccess()">
                                 <a href="#">
                                     <span class="circle" aria-hidden="true">
                                         <span class="icon arrow"></span>
                                     </span>
-                                    <span class="button-text">Thêm vào giỏ</span>
+                                    <span class="button-text">Details</span>
                                 </a>
                               </button>
-                            </form>
+                            </form> --}}
+                            <button class="learn-more">
+                                  <a href="product/update-product/{{id}}" class="product-title">
+                                      <span class="circle" aria-hidden="true">
+                                          <span class="icon arrow"></span>
+                                      </span>
+                                      <span class="button-text">Details</span>
+                                  </a>
+                                 
+                                </button>
+                              
                           </div>
                         </div>
                         {{/each}}
