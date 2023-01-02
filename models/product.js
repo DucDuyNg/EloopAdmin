@@ -4,11 +4,11 @@ const { partner } = require('./partner');
 
 const product = sequelize.define('product', {
   // Model attributes are defined here
-  id: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    primaryKey: true
-  },
+  // id: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  //   primaryKey: true
+  // },
   productImageUrl:{
       type: DataTypes.STRING,
       allowNull: false
@@ -100,7 +100,7 @@ async function addProduct(productImageUrl, productName, price,description,create
 }
 //removeProduct('74')
 async function removeProduct(id){
-  productName = 'Test Product'
+  //productName = 'Test Product'
   const productInstance = await findProductById(id)
   if(productInstance === null){
     console.log('Product is not exist!')
@@ -111,11 +111,13 @@ async function removeProduct(id){
   }
 }
 
-async function updateProduct(id,productImageUrl, productName, price,description){
-  const productInstance = await product.update({
-    productImageUrl: productImageUrl, productName: productName, price: price, description : description},
+async function updateProduct(productImageUrl, productName, price,description,createdAt,partnerId,catalogueId){
+  // const productInstance = await findProduct(productName)
+  
+    productInstance = await product.update({
+    productImageUrl: productImageUrl, productName: productName, price: price, description : description, createdAt:createdAt, partnerId:partnerId,catalogueId:catalogueId},
     {
-      where : {
+    where : {
         id: id
     }
   })
@@ -317,5 +319,6 @@ module.exports = {
   getProductList,
   findRelativeProduct,
   searchProduct,
+  updateProduct,
   getPriceList
 }
