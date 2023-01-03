@@ -53,10 +53,10 @@ async function findProduct(productName){
   return productInstance
 }
 
-//findProduct('10')
+
 async function findProductById(id){
-  const productInstance = await product.findOne({where : {id:id}})
-  console.log(productInstance.productName)
+  const productInstance = await sequelize.query(`SELECT * FROM products WHERE id = ${id}`, 
+  { type: sequelize.QueryTypes.SELECT});
   if (productInstance === null){
     console.log('Not found!')
   }else{
@@ -98,29 +98,34 @@ async function addProduct(productImageUrl, productName, price,description,create
     console.log('Product is exist!')
   }
 }
-//removeProduct('74')
+
 async function removeProduct(id){
-  //productName = 'Test Product'
-  const productInstance = await findProductById(id)
-  if(productInstance === null){
-    console.log('Product is not exist!')
-  }
-  else {
-    productInstance.destroy()
-    console.log('Product is removed!')
-  }
+  await sequelize.query(`DELETE FROM products WHERE  id = "${id}"`, 
+  { type: sequelize.QueryTypes.DELETE
+  })
+  console.log(`Product id : ${id} is removed!`)
 }
 
-async function updateProduct(productImageUrl, productName, price,description,createdAt,partnerId,catalogueId){
+async function updateProduct(productImageUrl, productName, price,description,createdAt,partnerId,catalogueId,id){
   // const productInstance = await findProduct(productName)
-  
-    productInstance = await product.update({
+
+// await sequelize.query(`UPDATE Customers
+// SET productImageUrl = '${productImageUrl}', 
+//     productImageUrl = '${productImageUrl}', 
+//     productImageUrl = '${productImageUrl}', 
+//     productImageUrl = '${productImageUrl}', 
+    
+// WHERE CustomerID = 1;`, 
+productImageUrl= productImageUrl || " "
+                                                    // { type: sequelize.QueryTypes.UPDATE });
+  const productInstance = await product.update({
     productImageUrl: productImageUrl, productName: productName, price: price, description : description, createdAt:createdAt, partnerId:partnerId,catalogueId:catalogueId},
     {
     where : {
-        id: id
+      productName: productName
     }
   })
+  console.log(productInstance);
   if(productInstance === null){
     console.log('product is not exist!')
   }

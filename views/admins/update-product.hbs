@@ -96,13 +96,16 @@
                                                                   </div>
                                                             </div>
                                                             <p class="text-danger">{{error}}</p>
-                                                            <form method="POST" action="/update-product" class="update-product">
+                                                            <form method="POST" action="/update-product" class="update-product" id="updateform">
                                                                  
                                                                         <div class="row tm-edit-product-row">                                                
                                                                               <div class="col-xl-6 col-lg-6 col-md-12">
-                                                                                    {{#with product}}
-                                                                                          
-                                                                                          <form action="" class="tm-edit-product-form">
+                                                                                    {{#with product}}                                                    
+            
+                                                                                                <div class="form-group mb-3">
+                                                                                                      <label for="product_name">Product id</label>
+                                                                                                      <input id="product_name"name="id" type="text" class="form-control validate" value="{{id}}" required/>
+                                                                                                </div>
                                                                                                 <div class="form-group mb-3">
                                                                                                       <label for="product_name">Product name</label>
                                                                                                       <input id="product_name"name="product_name" type="text" class="form-control validate" value="{{productName}}" required/>
@@ -133,6 +136,7 @@
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">                                                                                               
                                                                                                       <label for="category">Category</label>
+                                                                                                      
                                                                                                       <select id="catalogue_id" name="name_catagory" class="custom-select tm-select-accounts" id="category">
                                                                                                             <option selected>Select category</option>
                                                                                                             {{#each catalogueList}}      
@@ -161,14 +165,14 @@
                                                                                                       <div class="center">
                                                                                                             <div class="dropzone">
                                                                                                                   
-                                                                                                                  <form method="POST" action="/upload_image" enctype="multipart/form-data">
+                                                                                                                  {{!-- <form method="POST" action="/upload_image" enctype="multipart/form-data">
                                                                                                                         <label class="customUpload btnUpload btnM" style="padding: 2px 2px;"> 
                                                                                                                               <img src="{{productImageUrl}}" class="upload-icon" />
                                                                                                                               <input type="file" id="image" name="image" class="image" value="{{image}}" />
                                                                                                                               
                                                                                                                         </label>
                                                                                                                                                                                                                         
-                                                                                                                  </form>
+                                                                                                                  </form> --}}
                                                                                                             </div>
 
                                                                                                             {{!-- <button type="button" class="btn" name="uploadbutton">Upload file</button> --}}
@@ -181,7 +185,7 @@
                                                                                                       <button type="submit" class="button-41 btn-block" >Update Product Now</button>
                                                                                                       
                                                                                                 </div>
-                                                                                          </form>
+                                                                                          
                                                                                     {{/with}}
                                                                               
                                                                               

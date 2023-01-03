@@ -72,10 +72,11 @@ app.use('/distributor', distributorRouter);
 app.use('/admin-profile', profileRouter);
 app.use('/account-list', accountListRouter);
 app.use('/customer-order', customerOrderRouter);
+app.use('/update-product', updateProductRouter);
 //app.use('/:id/remove-product', removeProductRouter);
 
 app.use('/add-product', addProductRouter);
-app.use('/update-product/:id', updateProductRouter);
+
 // app.use('/charity', charityRouter);
 
 
