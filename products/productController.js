@@ -90,10 +90,12 @@ exports.updateProduct = async (req,res, next) =>{
     const description = req.body.description
     const catalogueId = req.body.name_catagory
     const CreationTime = req.body.expire_date
+    const status = req.body.status
     const price = req.body.price
     const imageProduct = req.body.upload_image ? undefined : ""
     //const imageProduct = '/images/D.jpg'
-    console.log(productName,partnerId ,
+    console.log(status,
+        productName,partnerId ,
         description, 
         catalogueId ,
         CreationTime, price, imageProduct
