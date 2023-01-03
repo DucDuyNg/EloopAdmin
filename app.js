@@ -5,6 +5,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const handlebars = require('express-handlebars')
 
+const passport = require('./config/passport');
+const session = require('express-session');
+
 const homeRouter = require('./home/homeRouter');
 const indexRouter = require('./routes/index');
 
@@ -51,6 +54,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.authenticate('session'));
 //
 app.listen(port || 80, () => {
   console.log(`Example app listening on http://localhost:${port}`)

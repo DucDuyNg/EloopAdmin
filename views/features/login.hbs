@@ -1,151 +1,44 @@
-<div class="container" id="login">
-  <ul class="nav" >
-    <li onclick="showLogin()">Đăng nhập</li>
-    <li onclick="showSignup()">Đăng ký</li>
-    <li onclick="showForgotPassword()">Quên mật khẩu</li>
-    <li onclick="showSubscribe()">Theo dõi</li>
-    <li onclick="showContactUs()">Liên hệ</li>
-  </ul>
-</div>
+<section class="h-100 mt-5">
+  <div class="container h-100">
+    <div class="row justify-content-sm-center h-100">
+      <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+        <div class="card shadow-lg mt-5">
+          <div class="text-center mt-3">
+            <img src="/images/logo.png" alt="logo" width="200">
+          </div>
+          <div class="card-body p-5">
+            <h1 class="fs-4 card-title fw-bold text-success">ĐĂNG NHẬP</h1>
+            <form method="POST" action="/login" class="needs-validation" novalidate="" autocomplete="off">
+              <div class="mb-3">
+                <label class="mb-2 text-muted" for="username">E-Mail</label>
+                <input id="username" class="form-control" name="username" value="" required autofocus>
+                <div class="invalid-feedback">
+                  Vui lòng nhập email
+                </div>
+              </div>
 
-  <script>
-    function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-    function onFailure(error) {
-      console.log(error);
-    }
-    function renderButton() {
-      gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 285,
-        'height': 40,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-      });
-    }
-  </script>
+              <div class="mb-3">
+                <div class="mb-2 w-100">
+                  <label class="text-muted" for="password">Password</label>
+                  <a href="#" class="float-end">
+                    Quên mật khẩu?
+                  </a>
+                </div>
+                <input id="password" type="password" class="form-control" name="password" required>
+                <div class="invalid-feedback">
+                  Vui lòng nhập mật khẩu
+                </div>
+              </div>
 
-<div class="wrapper">  
-  <div class="rec-prism">
-  
-    <div class="face face-top">
-      <div class="content">
-        <h2>Theo dõi</h2>
-        <small>Enter your email so we can send you the latest updates!</small>
-        <form onsubmit="event.preventDefault()">
-          <div class="field-wrapper">
-            <input type="text" name="email" placeholder="email">
-
-            <label>e-mail</label>
+              <div class="d-flex align-items-center">
+                <button type="submit" class="btn btn-success ms-auto">
+                  Đăng nhập
+                </button>
+              </div>
+            </form>
           </div>
-          <div class="field-wrapper">
-            <input type="submit" onclick="showThankYou()" value="Gửi">
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="face face-front">
-      <div class="content">
-        <h2>Đăng nhập</h2>
-        <form name="form0" action="admin" method="post">
-          <form onsubmit="event.preventDefault()">
-            <div class="field-wrapper">
-              <input type="text" name="usermail" placeholder="useremail">
-              <label>Tài khoản</label>
-            </div>
-            <div class="field-wrapper">
-              <input type="password" name="password" placeholder="password" autocomplete="new-password">
-              <label>Mật khẩu</label>
-            </div>
-            <div class="field-wrapper">
-              <input type="submit" onclick="showThankYou()" value="Gửi">
-            </div>
-            <span class="psw" onclick="showForgotPassword()">Quên mật khẩu? </span>
-            <span class="signup" onclick="showThankYou()">Bạn chưa có tài khoản? Đăng ký</span>
-          </form>
-        </form>
-      </div>
-    </div>
-    <div class="face face-back">
-      <div class="content">
-        <h2>Bạn quên mật khẩu?</h2>
-        <small>Enter your email so we can send you a reset link for your password</small>
-        <form onsubmit="event.preventDefault()">
-          <div class="field-wrapper">
-            <input type="text" name="email" placeholder="email">
-            <label>e-mail</label>
-          </div>
-
-          <div class="field-wrapper">
-            <input type="submit" onclick="Login()" value="Gửi">
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="face face-right">
-      <div class="content">
-        <h2>Đăng kí</h2>
-        <form name="form1" action="/user/signup" method="post">
-          <form onsubmit="event.preventDefault()">
-
-            <div class="field-wrapper">
-              <input type="text" id="useremail" name="email" placeholder="example@gmail.com">
-              <label>example@gmail.com</label>
-            </div>
-            {{!-- <h6 id="error" style="color: red; font-size:0.75em;margin-top:15px"></h6> --}}
-            <div class="field-wrapper">
-              <input type="password" name="password" placeholder="password" autocomplete="new-password">
-              <label>Mật khẩu</label>
-            </div>
-            <div class="field-wrapper">
-              <input type="password" name="password2" placeholder="password" autocomplete="new-password">
-              <label>Nhập lại mật khẩu</label>
-            </div>
-            <div class="field-wrapper">
-              {{!-- <input type="submit" onclick="showThankYou()" value="Gửi"> --}}
-              <input type="submit" onclick="validateEmail(document.form1.email)" value="Gửi">
-            </div>
-            <span class="signin" onclick="showLogin()">Đã có tài khoản? Đăng nhập</span>
-          </form>
-        </form>
-      </div>
-    </div>
-    <div class="face face-left">
-      <div class="content">
-        <h2>Liên hệ</h2>
-        <form onsubmit="event.preventDefault()">
-          <div class="field-wrapper">
-            <input type="text" name="name" placeholder="name">
-            <label>Họ Tên</label>
-          </div>
-          <div class="field-wrapper">
-            <input type="text" name="email" placeholder="email">
-            <label>e-mail</label>
-          </div>
-          <div class="field-wrapper">
-            <textarea placeholder="your message"></textarea>
-            <label>Vui lòng viết lời nhắn</label>
-          </div>
-          <div class="field-wrapper">
-            <input type="submit" onclick="showThankYou()" value="Gửi">
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="face face-bottom">
-      <div class="content">
-        <div class="thank-you-msg">
-          {{message}}
         </div>
       </div>
     </div>
   </div>
-</div>
-<div id="my-signin2" style="margin-left: 615px;"></div>
-<script>
-  
-
-</script>
+</section>

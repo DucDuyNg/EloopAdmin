@@ -24,6 +24,7 @@ console.log(admin === sequelize.models.admin); // true
 
 async function findAdmin(account){
   const adminInstance = await admin.findOne({where : {account:account}})
+  console.log(adminInstance)
   if (adminInstance === null){
     console.log('Not found!')
   }else{

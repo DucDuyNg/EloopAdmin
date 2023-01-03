@@ -1,16 +1,21 @@
-const {user,findUser,findAllUser,addUser,removeUser,updateUser} = require('../models/admin.js')
-
-exports.postAdminLogin = async (req,res,next) => {
-    console.log(req.body);
-    const existAdmin = await findUser(req.body.usermail)
-    console.log(existAdmin)
-    if(existAdmin !== null && existAdmin.password === req.body.password){
-        console.log('Login success')
-        res.render('admins/admin')
-    } else {
-        console.log('Wrong account or password')
-        res.redirect('/login')
+const admin = require('../models/admin.js')
+const bcrypt = require('bcryptjs');
+//const sessionStorage = require('sessionstorage')
+exports.showAdminLogin = (req, res, next) => {
+    res.render('features/login')
+}
+exports.checkUserCredential = async (account, password) => {
+    console.log(account)
+    console.log(password)
+    const user = await admin.findAdmin(account)
+    if (!user) return null;
+    if (await bcrypt.compare(password, user.password))
+        return user;
+    return null;
+}
+exports.isLoggedIn = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
     }
-
-    
+    res.redirect('/login');
 }
