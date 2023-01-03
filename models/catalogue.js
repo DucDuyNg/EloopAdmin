@@ -28,7 +28,7 @@ async function findCatalogue(account){
   }
   return catalogueInstance
 }
-findCatalogueIdByName('THỰC PHẨM HỮU CƠ')
+//findCatalogueIdByName('THỰC PHẨM HỮU CƠ')
 async function findCatalogueIdByName(name){
   const catalogueInstance = await catalogue.findOne({where : {name:name}})
   console.log(catalogueInstance.id)

@@ -3,14 +3,14 @@ const {partner,findPartner,findPartnerIdByName,addPartner,removePartner,getPartn
 const {catalogue,findCatalogue,findCatalogueIdByName,addCatalogue,removeCatalogue,getCatalogueList} = require('../models/catalogue')
 
 exports.showAddProduct = async(req, res, next) => {
-    const partnerId = ""
-    console.log(req.query.partner);
+    // const partnerId = ""
+    // console.log(req.query.partner);
 
-    const catalogue = ""
-    console.log(req.query.catalogue);
+    // const catalogue = ""
+    // console.log(req.query.catalogue);
 
-    const partnerList = await getPartnerList(partnerId);
-    const catalogueList = await getCatalogueList(catalogue);
+    const partnerList = await getPartnerList();
+    const catalogueList = await getCatalogueList();
 
     res.render('admins/add-product',{partnerList,catalogueList});
 }
@@ -43,11 +43,11 @@ exports.addNewProduct = async (req,res, next) =>{
     )
     
     const partner = ""
-    const partnerList = await getPartnerList(partner_name);
+    const partnerList = await getPartnerList();
 
     const catalogue = ""
     //console.log(req.query.catalogue);
-    const catalogueList = await getCatalogueList(catalogue);
+    const catalogueList = await getCatalogueList();
     const existProduct = await findProduct(productName)
     if(productName === ' ' || price === ' ' || image === ' '){
         res.render('admins/add-product', {error: 'Please fill out the information completely!',partnerList,catalogueList})
@@ -63,7 +63,7 @@ exports.addNewProduct = async (req,res, next) =>{
     // const partnerList = await getPartnerList(partnerId);
     const productList = await addProduct(imageProduct, productName, price,description,CreationTime,partnerId,catalogueId);
     
-    res.render('admins/add-product',{productList,catalogueList}) 
+    res.render('admins/add-product',{productList,partnerList,catalogueList}) 
 
 }
 
@@ -75,7 +75,8 @@ exports.showUpdateProduct = async(req, res, next) => {
 
     const partnerList = await getPartnerList();
     const catalogueList = await getCatalogueList();
-
+    console.log(partnerList)
+    console.log(catalogueList)
 
     const product = await findProductById(productId);
 
@@ -86,9 +87,12 @@ exports.updateProduct = async (req,res, next) =>{
     console.log("updateproduct");
     const productId = req.body.id
     const productName = req.body.product_name
-    const partnerId = req.body.id_partner
-    const description = req.body.description
-    const catalogueId = req.body.name_catagory
+
+    const partnerId = findPartnerIdByName(req.body.name_partner)
+    const catalogueId = findCatalogueIdByName(req.body.name_catagory)
+
+    const quality = req.body.product_quality
+    const description = req.body.description  
     const CreationTime = req.body.expire_date
     const status = req.body.status
     const price = req.body.price
@@ -98,26 +102,25 @@ exports.updateProduct = async (req,res, next) =>{
         productName,partnerId ,
         description, 
         catalogueId ,
-        CreationTime, price, imageProduct
+        CreationTime, price, imageProduct, quality
     )
 
-    const catalogue = ""
-    const partnerList = await getPartnerList(partnerId);
-    const catalogueList = await getCatalogueList(catalogue);
+    const partnerList = await getPartnerList();
+    const catalogueList = await getCatalogueList();
 
-    if(productName === ' ' || price === ' ' || imageProduct === ' '){
-        //res.render('admins/update-product/:productId', {error: 'Please fill out the information completely!',partnerList,catalogueList})
-        //res.redirect('back', {error: 'Please fill out the information completely!',partnerList,catalogueList})
-        res.redirect('../update-product/' + productId);
-    }
+    // if(productName === ' ' || price === ' ' || imageProduct === ' '){
+    //     //res.render('admins/update-product/:productId', {error: 'Please fill out the information completely!',partnerList,catalogueList})
+    //     //res.redirect('back', {error: 'Please fill out the information completely!',partnerList,catalogueList})
+    //     res.redirect('../update-product/' + productId);
+    // }
    
-    else{
+    //else{
         console.log('......................h2');
         const product = await findProductById(productId)
         const productUpdate = await updateProduct(imageProduct, productName, price,description,CreationTime,partnerId,catalogueId);
         console.log(product)
         res.redirect('back')
-    }
+    //}
 
     //const productUpdate = await updateProduct(imageProduct, productName, price,description,CreationTime,partnerId,catalogueId,productId);
    

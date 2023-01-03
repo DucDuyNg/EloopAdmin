@@ -26,34 +26,34 @@ const product = sequelize.define('product', {
     allowNull: true
   },
   
-  // catalogueId: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  //   foreignKey: true
-  // },
-  // partnerId: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false,
-  //   foreignKey: true
-  // },
+  catalogueId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    foreignKey: true
+  },
+  partnerId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    foreignKey: true
+  },
   
 }, {
   
   // Other model options go here
 });
-product.belongsTo(partner, {
-  foreignKey: "partnerId",
-  type: DataTypes.STRING,
-  allowNull: false,
-  //constraints: false,
-});
+// product.belongsTo(partner, {
+//   foreignKey: "partnerId",
+//   type: DataTypes.STRING,
+//   allowNull: false,
+//   //constraints: false,
+// });
 
-product.belongsTo(catalogue, {
-  foreignKey: "catalogueId",
-  type: DataTypes.STRING,
-  allowNull: false,
-  //constraints: false,
-});
+// product.belongsTo(catalogue, {
+//   foreignKey: "catalogueId",
+//   type: DataTypes.STRING,
+//   allowNull: false,
+//   //constraints: false,
+// });
 
 //findProduct('10')
 console.log(product === sequelize.models.product); // true

@@ -32,7 +32,7 @@ async function findPartner(account){
   return partnerInstance
 }
 
-findPartnerIdByName('Future Space Explore Co.')
+//findPartnerIdByName('Future Space Explore Co.')
 async function findPartnerIdByName(name){
   const partnerInstance = await partner.findOne({where : {name:name}})
   console.log(partnerInstance.id)
