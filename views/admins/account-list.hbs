@@ -23,14 +23,64 @@
       });
     });
   });
-  function sortTable(){
+  function sortTable2(){
     var mylist = $('#admin-content');
     var listitems = mylist.children('tr').get();
+  
     listitems.sort(function(a, b) {
+       window.console.log(a.childNodes)
       return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
     })
-    $.each(listitems, function(idx, itm) { mylist.append(itm); });
+    $.each(listitems, function(idx, itm) {
+      mylist.append(itm); 
+    });
   }
+  let sortName = false
+  let sortEmail = false
+  let sortCreate = false
+  let sortStatus = false
+  function sortTable(index){
+    var mylist = $('#admin-content');
+    var listitems = mylist.children('tr').get();
+    
+    listitems.sort(function(a, b) {  
+      
+      {{!-- window.console.log($(b).children('td').get(index) ) --}}
+      {{!-- window.console.log($($(b).children('td').get(index)).get(0).text()) --}}
+      if(index === 0){
+        return $($(a).children('td').get(index)).text().toUpperCase()
+              .localeCompare($($(b).children('td').get(index)).text().toUpperCase());
+      }
+      else if(index === 1){
+        return $($(a).children('td').get(index)).text().toUpperCase()
+              .localeCompare($($(b).children('td').get(index)).text().toUpperCase());
+      }
+      else if(index === 4){
+        return (new Date(timeConvert($($(a).children('td').get(index)).text())) < new timeConvert($($(b).children('td').get(index)).text())) 
+        
+      }
+      else if(index === 5){
+        function statusConvert(i){
+          var tmp1 = $(i).children('td').get(index)
+          var tmp2 = $(tmp1).children('select')
+          var tmp3 = $(tmp2).children('option').get(0)
+          window.console.log($(tmp3).text().toUpperCase())
+          return $(tmp3).text().toUpperCase();
+        }
+        
+        return statusConvert(a)
+              .localeCompare(statusConvert(b));
+      }
+      
+    })
+    $.each(listitems, function(idx, itm) {
+      mylist.append(itm); 
+    });
+    function timeConvert(time){
+      return time +  "GMT+0100 (CET)"
+    }
+  }
+  
 
 
   
@@ -91,7 +141,7 @@
 
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="/logout">
+      <a class="nav-link collapsed" href="pages-login.hbs">
         <i class="bi bi-box-arrow-in-right"></i>
         <span>Logout</span>
       </a>
@@ -116,9 +166,7 @@
   </div><!-- End Page Title -->
 
 
-  <form action="account-list/filter" method="get" id="account-list-query-form">
-    
-  </form>
+
   <section class="section dashboard">
     <div class="row">
       <!-- Left side columns -->
@@ -139,7 +187,7 @@
 
 
                               <div class="input-group">
-                                <button class="btn btn-secondary" form="account-list-query-form" type="submit">Filter</button>
+                                {{!-- <button class="btn btn-secondary" form="account-list-query-form" type="submit">Filter</button> --}}
                                 <input type="text" id="filter"  class="form-control" placeholder="Search..">
                                 
                               </div>
@@ -159,11 +207,12 @@
                               <thead>
                                 <tr>
                                   <th scope="col">Image</th>
-                                  <th scope="col" type="button" onclick="sortTable()">Email</th>
-                                  <th scope="col">Name</th>
+                                  <th scope="col" type="button" onclick="sortTable(0)">Email</th>
+                                  <th scope="col" type="button" onclick="sortTable(1)">Name</th>
                                   <th scope="col">Phone Number</th>
                                   <th scope="col">Bought</th>
-                                  <th scope="col">Create At</th>
+                                  <th scope="col" type="button" onclick="sortTable(4)">Create At</th>
+                                  <th scope="col" type="button" onclick="sortTable(5)" >Status</th>
                                 </tr>
                               </thead>
                               <tbody id="admin-content">
@@ -175,7 +224,32 @@
                                   <td>{{phone_number}}</td>
                                   <td class="fw-bold">{{number_product}}</td>
                                   <td class="date-time-createAt">{{createdAt}}</td>
+                                  <td >
+                                    <select id="{{status_id}}" name="status" class="custom-select tm-select-accounts" form="ban-account-form{{status_id}}" >
+                                          <option selected >{{status}}</option>
+                                          <option  value="ban">
+                                          Ban
+                                          </option>
+                                          <option  value="unban">
+                                           Unban
+                                          </option>
+                                          
+                                          
+                                    </select>
+                                    <form action="/account-list/{{name}}" method="post" form="ban-account-form">
+                                      <button >
+                                        Submit
+                                      </button>
+                                    </form>
+                                      {{!-- <form action="" method="post" id="ban-account-form{{status_id}}">
+                                          <input type="submit"  value="{{account}}{{status}}">
+                                       </form> --}}
+                                  </td>
                                 </tr>
+                                                                                                                              
+                                 
+                                 
+                               
                                 {{/each}}
                               </tbody>
                             </table>
@@ -203,14 +277,14 @@
     class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/chart.js/chart.min.js"></script>
-<script src="assets/vendor/echarts/echarts.min.js"></script>
-<script src="assets/vendor/quill/quill.min.js"></script>
-<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/vendor/chart.js/chart.min.js"></script>
+<script src="../../assets/vendor/echarts/echarts.min.js"></script>
+<script src="../../assets/vendor/quill/quill.min.js"></script>
+<script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="../../assets/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
-<script src="assets/js/main.js"></script>
+<script src="../../assets/js/main.js"></script>

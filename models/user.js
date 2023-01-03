@@ -31,6 +31,10 @@ const user = sequelize.define('user', {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   
 }, {
   // Other model options go here
