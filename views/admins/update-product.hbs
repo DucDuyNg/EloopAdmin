@@ -108,7 +108,19 @@
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
                                                                                                       <label for="product_name">Product name</label>
-                                                                                                      <input id="product_name"name="product_name" type="text" class="form-control validate" value="{{productName}}" required/>
+                                                                                                      <input id="product_name" type="" class="form-control" name="product_name" minlength="4" placeholder="Product Name" value="{{productName}}" required>
+                                                                                                      <div class="invalid-feedback">
+                                                                                                            Bắt buộc và ít nhất 4 ký tự
+                                                                                                      </div>
+                                                                                                      {{!-- <input id="product_name"name="product_name" type="text" class="form-control validate" value="{{productName}}" required/> --}}
+                                                                                                </div>
+                                                                                                <div class="form-group mb-3">
+                                                                                                      <label for="product_quality">Quality</label>
+                                                                                                      <input id="product_quality" type="number" class="form-control" name="product_quality" minlength="1" placeholder="Quality" value="{{quatity}}" pattern="^\d+$/" required>
+                                                                                                      <div class="invalid-feedback">
+                                                                                                            Bắt buộc và ít nhất 1 ký tự
+                                                                                                      </div>
+                                                                                                      {{!-- <input id="product_name"name="product_name" type="text" class="form-control validate" value="{{productName}}" required/> --}}
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">
                                                                                                       <label for="id_partner">Partner Id</label>
@@ -132,7 +144,7 @@
                                                                                                             
                                                                                                             {{/each}}
                                                                                                       </select>
-                                                                                                      
+                                                                                                     
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">                                                                                               
                                                                                                       <label for="category">Category</label>
@@ -166,14 +178,18 @@
                                                                                                       </div>
                                                                                                       <div class="form-group mb-3 col-xs-12 col-sm-6">
                                                                                                             <label for="price">Price</label>
-                                                                                                            <input id="price" name="price" type="text" class="form-control validate" value="{{price}}" required/>                                                     
+                                                                                                            <input id="price" type="number" class="form-control" name="price" minlength="4" placeholder="Price" value="{{price}}" required>
+                                                                                                            <div class="invalid-feedback">
+                                                                                                                  Bắt buộc và ít nhất 4 ký tự
+                                                                                                            </div>
+                                                                                                            {{!-- <input id="price" name="price" type="text" class="form-control validate" value="{{price}}" required/>                                                      --}}
                                                                                                       </div>
                                                                                                 </div>
                                                                                                 
                                                                                     </div>
                                                                                                 <div class="col-xl-2 col-lg-6 col-md-12 mx-auto mb-4">
                                                                                                 
-                                                                                                      <div class="center">
+                                                                                                      <div class="center" id="image">
                                                                                                             <div class="dropzone">
                                                                                                                   
                                                                                                                   {{!-- <form method="POST" action="/upload_image" enctype="multipart/form-data">
@@ -251,6 +267,48 @@
             $.post('remove/user/'+ productId) // This calls the server. Todo : add a callback, etc.
       }
 </script> --}}
+
+<script type="text/javascript">
+    originalOnload = window.onload;
+    window.onload = function ($) {
+        if (originalOnload) {
+            originalOnload();
+        }
+        //curl -X POST -H "Content-Type: application/json" -d '{"username":"admin"}' http://localhost:3000/user/signup/checkAvailability
+        $(document).ready(function () {
+            $("#username").keyup(function () {
+                $.ajax({
+                    url: '/user/signup/checkAvailability',
+                    method: 'POST',
+                    data: {
+                        username: $("#username").val()
+                    },
+                    success: function (new_data) {
+                        var email = document.getElementById("username");
+                        var submit = document.getElementById("submit");
+                        console.log(email.value);
+                        if (new_data == 'true') {
+                            email.classList.remove("is-invalid");
+                            email.classList.remove("text-danger");
+                            email.classList.add("is-valid");
+                            submit.disabled = false;
+                        } else if (new_data == 'false') {
+                            email.classList.add("is-invalid");
+                            email.classList.add("text-danger");
+                            document.getElementsByClassName("invalid-feedback")[2].innerHTML = "Email đã tồn tại";
+                            submit.disabled = true;                        
+                        } else if (new_data == 'notEmail') {
+                            email.classList.add("is-invalid");
+                            email.classList.add("text-danger");
+                            document.getElementsByClassName("invalid-feedback")[2].innerHTML = "Email không đúng định dạng";
+                            submit.disabled = true;
+                        }
+                    }
+                })
+            })
+        })
+    }(jQuery);
+</script>
 
 <!-- Vendor JS Files -->
 <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
