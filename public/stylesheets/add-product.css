@@ -15,13 +15,13 @@
   font-family: "Open Sans", Helvetica, sans-serif;
 }
 
-.center {
+#image .center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
-  height: 260px;
+  width: auto;
+  height: auto;
   border-radius: 3px;
   box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
   background: #fff;
@@ -44,12 +44,12 @@ h1 {
   color: #666;
 }
 
-.dropzone {
+#image .dropzone {
   width: 100px;
-  height: 80px;
+  height: 60px;
   border: 1px dashed #999;
   border-radius: 3px;
-  text-align: center;
+  text-align: end;
 }
 
 .upload-icon {
