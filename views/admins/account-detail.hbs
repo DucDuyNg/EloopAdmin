@@ -1,53 +1,140 @@
-<section class="product">
-  <div class="product__photo">
-    <div class="photo-container">
-      <div class="photo-main">
-        <div class="controls">
-          <i class="material-icons">share</i>
-          <i class="material-icons">favorite_border</i>
-        </div>
-        <img src="https://res.cloudinary.com/john-mantas/image/upload/v1537291846/codepen/delicious-apples/green-apple-with-slice.png" alt="green apple slice">
-      </div>
-      <div class="photo-album">
-        <ul>
-          <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302064/codepen/delicious-apples/green-apple2.png" alt="green apple"></li>
-          <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303532/codepen/delicious-apples/half-apple.png" alt="half apple"></li>
-          <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303160/codepen/delicious-apples/green-apple-flipped.png" alt="green apple"></li>
-          <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303708/codepen/delicious-apples/apple-top.png" alt="apple top"></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="product__info">
-    <div class="title">
-      <h1>Delicious Apples</h1>
-      <span>COD: 45999</span>
-    </div>
-    <div class="price">
-      R$ <span>7.93</span>
-    </div>
-    <div class="variant">
-      <h3>SELECT A COLOR</h3>
-      <ul>
-        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302064/codepen/delicious-apples/green-apple2.png" alt="green apple"></li>
-        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302752/codepen/delicious-apples/yellow-apple.png" alt="yellow apple"></li>
-        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302427/codepen/delicious-apples/orange-apple.png" alt="orange apple"></li>
-        <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302285/codepen/delicious-apples/red-apple.png" alt="red apple"></li>
-      </ul>
-    </div>
-    <div class="description">
-      <h3>BENEFITS</h3>
-      <ul>
-        <li>Apples are nutricious</li>
-        <li>Apples may be good for weight loss</li>
-        <li>Apples may be good for bone health</li>
-        <li>They're linked to a lowest risk of diabetes</li>
-      </ul>
-    </div>
-    <button class="buy--btn">ADD TO CART</button>
-  </div>
-</section>
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
 
-<footer>
-  <p>Design from <a href="https://dribbble.com/shots/5216438-Daily-UI-012">dribbble shot</a> of <a href="https://dribbble.com/rodrigorramos">Rodrigo Ramos</a></p>
-</footer>
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link " href="/admin">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="/product">
+              <i class="bi bi-circle"></i><span>Products</span>
+            </a>
+          </li>
+          <li>
+            <a href="/distributor">
+              <i class="bi bi-circle"></i><span>Distributors</span>
+            </a>
+          </li>
+          <li>
+            <a href="/recycle">
+              <i class="bi bi-circle"></i><span>Recycles</span>
+            </a>
+          </li>
+          
+        </ul>
+    </li><!-- End Components Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/account-list">
+        <i class="bi bi-person-circle"></i>
+        <span>Account List</span>
+      </a>
+    </li><!-- End Account List Nav -->
+    
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/customer-order">
+        <i class="bi bi-cart2"></i>
+        <span>Customer's Orders</span>
+      </a>
+    </li><!-- End Customer's Orders Nav -->
+
+    <li class="nav-heading">Pages</li>
+
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="pages-login.hbs">
+        <i class="bi bi-box-arrow-in-right"></i>
+        <span>Logout</span>
+      </a>
+    </li><!-- End Login Page Nav -->
+
+  </ul>
+
+</aside><!-- End Sidebar-->
+
+
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Account List</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+        <li class="breadcrumb-item active">Account List</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section id="account_detail">
+    {{#with account}}
+    <div class="account__photo">
+      <div class="photo-container">
+        <div class="photo-main">
+          <img src="{{image}}" >
+        </div>
+        <div class="photo-album">
+          <ul>
+            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537302064/codepen/delicious-apples/green-apple2.png" alt="green apple"></li>
+            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303532/codepen/delicious-apples/half-apple.png" alt="half apple"></li>
+            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303160/codepen/delicious-apples/green-apple-flipped.png" alt="green apple"></li>
+            <li><img src="https://res.cloudinary.com/john-mantas/image/upload/v1537303708/codepen/delicious-apples/apple-top.png" alt="apple top"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="product__info">
+      <div class="title">
+        <h1>{{name}}</h1>
+        <h3>email: {{account}}</h3>
+      </div>
+      <div class="price">
+        Phone number:<h2> {{phone_number}}</h2>
+      </div>
+      <div class="variant">
+        <h2>Status: {{status}}</h2>      
+      </div>
+      <form action="/account-list/{{account}}" method="post" form="ban-account-form {{account}}">
+        <select id="status" name="status" class="custom-select tm-select-accounts" >
+          <option selected >{{status}}</option>
+          <option  value="ban">
+          Ban
+          </option>
+          <option  value="unban">
+            Unban
+          </option>
+              
+              
+        </select>
+        
+        
+
+        <div class="description">
+          <h3>Active status:</h3>
+          <ul>
+            <li>Number of product: {{number_product}}</li>
+            <li>number of charity: {{number_charity}}</li>
+            
+          </ul>
+        </div>
+        
+        <button class="buy--btn">Update account</button>
+      </form>
+      
+    </div>
+    {{/with }}
+  </section>
+
+</main>
+<!-- End #main -->

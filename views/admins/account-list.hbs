@@ -219,13 +219,15 @@
                                 {{#each accountList}}
                                 <tr>
                                   <th scope="row"><a href="#"><img src="../images/D.jpg" alt=""></a></th>
-                                  <td>{{account}}</td>
+                                  
+                                  <td><a href="/account_detail/{{account}}" class="product-title">{{account}}</a></td>
                                   <td>{{name}}</td>
                                   <td>{{phone_number}}</td>
                                   <td class="fw-bold">{{number_product}}</td>
                                   <td class="date-time-createAt">{{createdAt}}</td>
                                   <td >
-                                    <select id="{{status_id}}" name="status" class="custom-select tm-select-accounts" form="ban-account-form{{status_id}}" >
+                                    <form action="/account-list/{{account}}" method="post" form="ban-account-form">
+                                    <select id="status" name="status" class="custom-select tm-select-accounts">
                                           <option selected >{{status}}</option>
                                           <option  value="ban">
                                           Ban
@@ -236,7 +238,8 @@
                                           
                                           
                                     </select>
-                                    <form action="/account-list/{{name}}" method="post" form="ban-account-form">
+                                   
+                                    
                                       <button >
                                         Submit
                                       </button>

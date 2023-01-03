@@ -35,6 +35,10 @@ const user = sequelize.define('user', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   
 }, {
   // Other model options go here
@@ -53,6 +57,7 @@ async function findUser(account){
   }
   return userInstance
 }
+
 //findAllUser()
 async function findAllUser(){
   const userInstance = await sequelize.query(`select id,createdAt from users`,
@@ -105,6 +110,24 @@ async function updateUser(name, account, password){
     console.log('User is updated!')
   }
 }
+// BanOrUnban('HomerBustos6@nowhere.com', 'unban')
+async function BanOrUnban(account, status){
+  const userInstance = await user.update({
+    status : status},
+    {
+      where : {
+        account: account
+    }
+  })
+  if(userInstance === null){
+    console.log('User is not exist!')
+  }
+  else {
+    
+    console.log('User is updated!')
+  }
+
+}
 
 async function getAccountList(){
   const accountList = await user.findAll()
@@ -119,4 +142,4 @@ async function getAccountList(){
 // addUser('hu','test','123')
 // updateUser('hu','hh','12345')
 
-module.exports ={user,findUser,findAllUser,addUser,removeUser,updateUser,getAccountList}
+module.exports ={user,findUser,findAllUser,addUser,removeUser,updateUser,BanOrUnban,getAccountList}
