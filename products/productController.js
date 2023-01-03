@@ -49,7 +49,10 @@ exports.addNewProduct = async (req,res, next) =>{
     //console.log(req.query.catalogue);
     const catalogueList = await getCatalogueList(catalogue);
     const existProduct = await findProduct(productName)
-    if (existProduct !== null) {
+    if(productName === ' ' || price === ' ' || image === ' '){
+        res.render('admins/add-product', {error: 'Please fill out the information completely!',partnerList,catalogueList})
+    }
+    else if (existProduct !== null) {
         console.log('Product is exist!')
         res.render('admins/add-product', { error: 'Product is exist!',partnerList,catalogueList });
         return;
@@ -99,12 +102,23 @@ exports.updateProduct = async (req,res, next) =>{
     const catalogue = ""
     const partnerList = await getPartnerList(partnerId);
     const catalogueList = await getCatalogueList(catalogue);
+
+    if(productName === ' ' || price === ' ' || imageProduct === ' '){
+        //res.render('admins/update-product/:productId', {error: 'Please fill out the information completely!',partnerList,catalogueList})
+        //res.redirect('back', {error: 'Please fill out the information completely!',partnerList,catalogueList})
+        res.redirect('../update-product/' + productId);
+    }
    
+    else{
+        console.log('......................h2');
+        const product = await findProductById(productId)
+        const productUpdate = await updateProduct(imageProduct, productName, price,description,CreationTime,partnerId,catalogueId);
+        console.log(product)
+        res.redirect('back')
+    }
+
     //const productUpdate = await updateProduct(imageProduct, productName, price,description,CreationTime,partnerId,catalogueId,productId);
-   console.log(productId);
-    const product = await findProductById(productId)
-    console.log(product)
-    res.redirect('back')
+   
   
 }
 

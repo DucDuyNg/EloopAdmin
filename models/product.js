@@ -1,6 +1,6 @@
 const { sequelize,DataTypes } = require('../config/db');
 const { partner } = require('./partner');
-//const { catalogue } = require('./catalogue');
+const { catalogue } = require('./catalogue');
 
 const product = sequelize.define('product', {
   // Model attributes are defined here
@@ -25,19 +25,34 @@ const product = sequelize.define('product', {
     type: DataTypes.STRING(3000),
     allowNull: true
   },
-  catalogueId: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    primaryKey: true
-  },
-  partnerId: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    primaryKey: true
-  },
+  
+  // catalogueId: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  //   foreignKey: true
+  // },
+  // partnerId: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false,
+  //   foreignKey: true
+  // },
   
 }, {
+  
   // Other model options go here
+});
+product.belongsTo(partner, {
+  foreignKey: "partnerId",
+  type: DataTypes.STRING,
+  allowNull: false,
+  //constraints: false,
+});
+
+product.belongsTo(catalogue, {
+  foreignKey: "catalogueId",
+  type: DataTypes.STRING,
+  allowNull: false,
+  //constraints: false,
 });
 
 //findProduct('10')
@@ -106,9 +121,10 @@ async function removeProduct(id){
   console.log(`Product id : ${id} is removed!`)
 }
 
-async function updateProduct(productImageUrl, productName, price,description,createdAt,partnerId,catalogueId,id){
+async function updateProduct(productImageUrl, productName, price,description,createdAt,partnerId,catalogueId){
   // const productInstance = await findProduct(productName)
-
+  console.log('............................')
+  console.log(productImageUrl, productName, price,description,createdAt,partnerId,catalogueId)
 // await sequelize.query(`UPDATE Customers
 // SET productImageUrl = '${productImageUrl}', 
 //     productImageUrl = '${productImageUrl}', 
