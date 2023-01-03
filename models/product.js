@@ -224,7 +224,7 @@ async function getProductList(partnerId,catalogueId,price,sortType){
                                       ${sortTypeQueryString}   
                                        `
                                 ,{ type: sequelize.QueryTypes.SELECT,
-                                      models: product});
+                                    });
   if (productList === null){
     console.log('list empty')
   }else{
