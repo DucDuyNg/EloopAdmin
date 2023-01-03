@@ -39,10 +39,12 @@ let port = process.env.PORT || 80
 app.engine('.hbs', handlebars.engine({
   extname: '.hbs',
   helpers: {
-    paginate : (paginate)
+    paginate: (paginate)
   },
-  runtimeOptions:{allowProtoPropertiesByDefault:true,
-  allowedProtoMethodsByDefault:true}
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowedProtoMethodsByDefault: true
+  }
 }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.hbs');
@@ -86,18 +88,25 @@ app.use('/update-product', updateProductRouter);
 //app.use('/:id/remove-product', removeProductRouter);
 
 app.use('/add-product', addProductRouter);
-
+app.use('/logout', (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/login');
+  });
+});
 // app.use('/charity', charityRouter);
 
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
