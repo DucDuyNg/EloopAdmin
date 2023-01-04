@@ -146,7 +146,7 @@ productImageUrl= productImageUrl || " "
     console.log('product is not exist!')
   }
   else {
-    productInstance.destroy()
+    //productInstance.destroy()
     console.log('User is updated!')
   }
 }
