@@ -9,7 +9,7 @@ const sellProductController = require('../customer-order/customerOrderController
 
 router.get('/', sellProductController.getOrderList);
 //router.post('/:id', sellProductController.addToOrder);
-
+router.post('/:id', sellProductController.updateStatus);
 
 
 module.exports = router;

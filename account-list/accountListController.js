@@ -8,8 +8,8 @@ exports.getAccountList = async (req,res,next) =>{
 }
 exports.banAccount = async (req,res,next) =>{
     let accountBan = req.params.account
-    console.log(req.body)
-    console.log(req.params)
+    // console.log(req.body)
+    // console.log(req.params)
     
     let status = req.body.status
     console.log('...................account')

@@ -66,7 +66,7 @@
 
 
 <main id="main" class="main">
-
+    
   <div class="pagetitle">
     <h1>Order Detail</h1>
     <nav>
@@ -76,11 +76,22 @@
       </ol>
     </nav>
   </div><!-- End Page Title -->
-
+  <div class="card">
+            {{#each product}}
+            <h3>Product name: {{productName}}</h3>
+            
+            {{/each}}
+            {{#each account}}
+            <h3>username: {{name}}</h3>
+            {{/each}}
+      </div>
+      
   <section id="account_detail">
+      
     {{#with order}}
     <div class="account__photo">
       <div class="photo-container">
+      
         <div class="photo-main">
           <img src="{{productImageUrl}}" >
         </div>
@@ -95,22 +106,14 @@
       </div>
     </div>
     <div class="product__info">
-      <div class="title">
-      {{#each product}}
-        <h1>{{productName}}</h1>
-        
-      {{/each}}
-      {{#each account}}
-      <h3>username: {{name}}</h3>
-      {{/each}}
-      </div>
+      
       <div class="price">
         Creation time:<h2> {{createdAt}}</h2>
       </div>
       <div class="variant">
         <h2>Status: {{status}}</h2>      
       </div>
-      <form action="/account-list/{{account}}" method="post" form="ban-account-form {{account}}">
+      <form action="/customer-order/{{id}}" method="post" form="order-account-form">
         <select id="status" name="status" class="custom-select tm-select-accounts" >
           <option selected >{{status}}</option>
           <option  value="pending">
@@ -137,7 +140,7 @@
           </ul>
         </div>
         
-        <button class="buy--btn">Update account</button>
+        <button class="buy--btn">Update order</button>
       </form>
       
     </div>
