@@ -1,17 +1,64 @@
-{{!-- {{#if adminLogin}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 window.onload = function() {
-    window.console.log(`admin ne `)
-    
-    let login = sessionStorage.getItem("isLogin");
-    window.console.log(login)
-    if(login === undefined || login === null){
-        window.location = "https://eloop-admin-hda.herokuapp.com/admin"
+    const timeList = document.getElementsByClassName("date-time-createAt")
+    for (let i = 0; i < timeList.length; i++) {
+      const time =  timeList[i].innerHTML
+      const sliceLength = time.split(" ",4).length
+      {{!-- Tue Mar 29 2022 20:41:06 GMT+0700 (Indochina Time) --}}
+      timeList[i].innerHTML = time.slice(0,24);
     }
-    sessionStorage.setItem("isLogin", true);
-}
+  }
+  function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+
+  $(document).ready(function(){
+    $("#filter").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#order-content tr").filter(function() {
+         var a = $(this).children('td').get(4)
+         var tmp1_5 = $(a).children('form')
+          var tmp2 = $(tmp1_5).children('select')
+          var tmp3 = $(tmp2).children('option').get(0)
+         {{!-- window.console.log($(a).text().toLowerCase().indexOf(value)) --}}
+        $(this).toggle($(tmp3).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+ function sortTable(index){
+    var mylist = $('#order-content');
+    var listitems = mylist.children('tr').get();
+  
+    listitems.sort(function(a, b) {  
+        window.console.log($(a).children('td').get(index))
+   
+      if(index === 3){
+        return (new Date(timeConvert($($(a).children('td').get(index)).text())) < new timeConvert($($(b).children('td').get(index)).text())) 
+        
+      }
+      else if(index === 4){
+        function statusConvert(i){
+          var tmp1 = $(i).children('td').get(index)
+          var tmp1_5 = $(tmp1).children('form')
+          var tmp2 = $(tmp1_5).children('select')
+          var tmp3 = $(tmp2).children('option').get(0)
+          return $(tmp3).text().toUpperCase();
+        }
+        
+        return statusConvert(a)
+              .localeCompare(statusConvert(b));
+      }
+      
+    })
+    $.each(listitems, function(idx, itm) {
+      mylist.append(itm); 
+    });
+    function timeConvert(time){
+      return time +  "GMT+0100 (CET)"
+    }
+  }
 </script> 
-{{/if }} --}}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -113,19 +160,13 @@ window.onload = function() {
                       <div class="col-12">
                         <div class="card top-selling overflow-auto">
 
+                      
                           <div class="filter">
-                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                              <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                              </li>
-
-                              <li><a class="dropdown-item" href="#">Today</a></li>
-                              <li><a class="dropdown-item" href="#">This Month</a></li>
-                              <li><a class="dropdown-item" href="#">This Year</a></li>
-                            </ul>
+                              <div class="input-group">
+                                {{!-- <button class="btn btn-secondary" form="account-list-query-form" type="submit">Filter</button> --}}
+                                <input type="text" id="filter"  class="form-control" placeholder="Filter">
+                              </div>  
                           </div>
-
                           <div class="card-body pb-0">
                             <h5 class="card-title">Order List <span>| Today</span></h5>
 
@@ -135,13 +176,13 @@ window.onload = function() {
                                   <th scope="col">Image</th>
                                   <th scope="col">Product Name</th>
                                   <th scope="col">Price</th>
-                                  <th scope="col">Username</th>
-                                  <th scope="col">Creatien Time</th>
-                                  <th scope="col" type="button" onclick="sortTable(0)">Status</th>
+                                  <th scope="col" >Username</th>
+                                  <th scope="col" type="button" onclick="sortTable(3)">Creatien Time</th>
+                                  <th scope="col" type="button" onclick="sortTable(4)">Status</th>
                                 </tr>
                               </thead>
                               
-                              <tbody>
+                              <tbody id="order-content">
                                 {{#each OrderList}}
                                 <tr>
                                   
@@ -150,7 +191,7 @@ window.onload = function() {
                                   <td><a href="/order_detail/{{id}}" class="product-title">{{productName}}</a></td>
                                   <td>{{price}}</td>
                                   <td class="fw-bold">{{name}}</td>
-                                  <td>{{createdAt}}</td>  
+                                  <td class="date-time-createAt">{{createdAt}}</td>  
                                   <td >
                                     <form action="/customer-order/{{id}}" method="post" form="ban-account-form">
                                     <select id="status" name="status" class="custom-select tm-select-accounts">

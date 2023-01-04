@@ -24,7 +24,7 @@ exports.banAccount = async (req,res,next) =>{
     console.log(accountList.length);
 
 
-    res.render('admins/account-list', {accountList : accountList})
+    res.redirect('back')
 }
 
 exports.getFillterAccountList = async (req,res,next) =>{

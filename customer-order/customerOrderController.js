@@ -70,5 +70,5 @@ exports.updateStatus = async (req,res,next) =>{
       console.log(OrderList.length);
 
 
-  res.render('admins/customer-order', {OrderList : OrderList})
+  res.redirect('back')
 }

@@ -14,7 +14,7 @@
     }
   }
 
-  function getCellValue(row, index){ return $(row).children('td').eq(index).text() }
+  {{!-- function getCellValue(row, index){ return $(row).children('td').eq(index).text() } --}}
   $(document).ready(function(){
     $("#filter").on("keyup", function() {
       var value = $(this).val().toLowerCase();
@@ -23,22 +23,9 @@
       });
     });
   });
-  function sortTable2(){
-    var mylist = $('#admin-content');
-    var listitems = mylist.children('tr').get();
   
-    listitems.sort(function(a, b) {
-       window.console.log(a.childNodes)
-      return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
-    })
-    $.each(listitems, function(idx, itm) {
-      mylist.append(itm); 
-    });
-  }
-  let sortName = false
-  let sortEmail = false
-  let sortCreate = false
-  let sortStatus = false
+  
+ 
   function sortTable(index){
     var mylist = $('#admin-content');
     var listitems = mylist.children('tr').get();
@@ -62,9 +49,10 @@
       else if(index === 5){
         function statusConvert(i){
           var tmp1 = $(i).children('td').get(index)
-          var tmp2 = $(tmp1).children('select')
+          var tmp1_5 = $(tmp1).children('form')
+          var tmp2 = $(tmp1_5).children('select')
           var tmp3 = $(tmp2).children('option').get(0)
-          window.console.log($(tmp3).text().toUpperCase())
+          {{!-- window.console.log($(tmp3).text().toUpperCase()) --}}
           return $(tmp3).text().toUpperCase();
         }
         
