@@ -1,4 +1,4 @@
-{{#if adminLogin}}
+{{!-- {{#if adminLogin}}
 <script type="text/javascript">
 window.onload = function() {
     window.console.log(`admin ne `)
@@ -11,7 +11,11 @@ window.onload = function() {
     sessionStorage.setItem("isLogin", true);
 }
 </script> 
-{{/if }}
+{{/if }} --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+   
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -133,7 +137,7 @@ window.onload = function() {
                                   <th scope="col">Price</th>
                                   <th scope="col">Username</th>
                                   <th scope="col">Creatien Time</th>
-                                  <th scope="col">Status</th>
+                                  <th scope="col" type="button" onclick="sortTable(0)">Status</th>
                                 </tr>
                               </thead>
                               
@@ -142,10 +146,35 @@ window.onload = function() {
                                 <tr>
                                   
                                   <th scope="row"><a href="#"><img src={{productImageUrl}} alt=""></a></th>
-                                  <td>{{productName}}</td>
+                            
+                                  <td><a href="/order_detail/{{id}}" class="product-title">{{productName}}</a></td>
                                   <td>{{price}}</td>
                                   <td class="fw-bold">{{name}}</td>
-                                  <td>{{createdAt}}</td>         
+                                  <td>{{createdAt}}</td>  
+                                  <td >
+                                    <form action="/account-list/{{account}}" method="post" form="ban-account-form">
+                                    <select id="status" name="status" class="custom-select tm-select-accounts">
+                                          <option selected >{{status}}</option>
+                                          <option  value="pending">
+                                          Pending
+                                          </option>
+                                          <option  value="Delivery">
+                                           Delivery
+                                          </option>
+                                          <option  value="Success">
+                                           Success
+                                          </option>
+                                          
+                                          
+                                    </select>
+                                   
+                                    
+                                      <button >
+                                        Submit
+                                      </button>
+                                    </form>
+                                    
+                                  </td>       
                                 </tr>
                                 {{/each}}
                               

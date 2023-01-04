@@ -8,9 +8,13 @@ const Order = sequelize.define('Order', {
 });
 
 
-console.log(Order === sequelize.models.Order); // true
+// console.log(Order === sequelize.models.sellProducts); // true
 async function findOrder(id){
-  const sellOrderInstance = await Order.findOne({where : {id:id}})
+  //const sellOrderInstance = await Order.findOne({where : {id:id}})
+
+  const sellOrderInstance = await sequelize.query(`SELECT * FROM sellProducts WHERE id = ${id}`, 
+  { type: sequelize.QueryTypes.SELECT});
+  //console.log(sellOrderInstance)
   if (sellOrderInstance === null){
     console.log('Not found!')
   }else{
@@ -20,7 +24,7 @@ async function findOrder(id){
 }
 //findAllOrder()
 async function findAllOrder(){
-      const orderInstance = await sequelize.query(`   SELECT sellProducts.id,sellProducts.createdAt, productImageUrl, productName,price, name FROM sellProducts, users, products
+      const orderInstance = await sequelize.query(`   SELECT sellProducts.id,sellProducts.createdAt, productImageUrl, productName,price,sellProducts.status ,name FROM sellProducts, users, products
                                                       WHERE sellProducts.productId = products.id
                                                       AND sellProducts.userId = users.id`,
                                                       {type: sequelize.QueryTypes.SELECT});
@@ -84,9 +88,9 @@ async function removeOrder(id){
 async function getOrderList(){
       const orderList = await findAllOrder()
       if (orderList === null){
-      console.log('account are not exists')
+      console.log('order list are not exists')
       }else{
-      console.log('account list is built!')
+      console.log('order list is built!')
       }
       return orderList
 }

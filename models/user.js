@@ -58,6 +58,20 @@ async function findUser(account){
   return userInstance
 }
 
+async function findUserById(id){
+  //const sellOrderInstance = await Order.findOne({where : {id:id}})
+
+  const userInstance = await sequelize.query(`SELECT * FROM users WHERE id = ${id}`, 
+  { type: sequelize.QueryTypes.SELECT});
+  //console.log(sellOrderInstance)
+  if (userInstance === null){
+    console.log('Not found!')
+  }else{
+    console.log('user is found!')
+  }
+  return userInstance
+}
+
 //findAllUser()
 async function findAllUser(){
   const userInstance = await sequelize.query(`select id,createdAt from users`,
@@ -142,4 +156,4 @@ async function getAccountList(){
 // addUser('hu','test','123')
 // updateUser('hu','hh','12345')
 
-module.exports ={user,findUser,findAllUser,addUser,removeUser,updateUser,BanOrUnban,getAccountList}
+module.exports ={user,findUser,findUserById,findAllUser,addUser,removeUser,updateUser,BanOrUnban,getAccountList}

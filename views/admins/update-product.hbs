@@ -95,12 +95,13 @@
                                                                   <h1 class="display-4 fw-bold mb-5 text-center">Update Product</h1>
                                                                   </div>
                                                             </div>
-                                                            <p class="text-danger">{{error}}</p>
-                                                            <form method="POST" action="/update-product" class="update-product" id="updateform">
+                                                            
                                                                  
                                                                         <div class="row tm-edit-product-row">                                                
                                                                               <div class="col-xl-6 col-lg-6 col-md-12">
-                                                                                    {{#with product}}                                                    
+                                                                                    {{#with product}}        
+                                                                                                <p class="text-danger">{{error}}</p>
+                                                                                          <form method="POST" action="/update-product" class="update-product" id="updateform">                                            
             
                                                                                                 <div class="form-group mb-3">
                                                                                                       <label for="product_name">Product id</label>
@@ -136,26 +137,30 @@
                                                                                                 </div>
                                                                                                 <div class="form-group mb-2">                                                                                               
                                                                                                       <label for="name_partner">Partner</label>
-                                                                                                      <select id="name_partner" name="name_partner" class="custom-select tm-select-accounts" id="partner" style="margin-left:10px">
+                                                                                                      <select id="name_partner" name="name_partner" class="custom-select tm-select-accounts" style="margin-left:10px">
                                                                                                             <option selected>Select partner</option>
-                                                                                                            {{#each partnerList}}      
+                                                                                                             
                                                                                                                   
-                                                                                                                  <option  value="">{{name}}</option>
+                                                                                                            <option  value="">THỰC PHẨM HỮU CƠ</option>
+                                                                                                            <option  value="">CHĂM SÓC CÁ NHÂN</option>
+                                                                                                            <option  value="">VỆ SINH NHÀ CỬA</option>
                                                                                                             
-                                                                                                            {{/each}}
+                                                                                                           
                                                                                                       </select>
                                                                                                      
                                                                                                 </div>
                                                                                                 <div class="form-group mb-3">                                                                                               
                                                                                                       <label for="category">Category</label>
                                                                                                       
-                                                                                                      <select id="catalogue_id" name="name_catagory" class="custom-select tm-select-accounts" id="category">
+                                                                                                      <select id="name_catagory" name="name_catagory" class="custom-select tm-select-accounts">
                                                                                                             <option selected>Select category</option>
-                                                                                                            {{#each catalogueList}}      
+                                                                                                         
                                                                                                                   
-                                                                                                                  <option  value="">{{name}}</option>
+                                                                                                            <option  value="">Future Space Explore Co.</option>
+                                                                                                            <option  value="">Global Mobile Group</option>
+                                                                                                            <option  value="">North Protection Corp.</option>
                                                                                                             
-                                                                                                            {{/each}}
+                                                                                                    
                                                                                                       </select>
                                                                                                       
                                                                                                 </div>
@@ -213,7 +218,7 @@
                                                                                                       
                                                                                                 </div>
                                                                                           
-                                                                                    {{/with}}
+                                                                                          {{/with}}
                                                                               
                                                                               
                                                                         </div>
