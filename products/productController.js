@@ -88,6 +88,8 @@ exports.updateProduct = async (req,res, next) =>{
     const productId = req.body.id
     const productName = req.body.product_name
 
+    console.log(req.body.name_partner)
+    console.log(req.body.name_catagory)
     const partnerId = findPartnerIdByName(req.body.name_partner)
     const catalogueId = findCatalogueIdByName(req.body.name_catagory)
 

@@ -1,4 +1,4 @@
-const {user,findUser,findAllUser,addUser,removeUser,updateUser,BanOrUnban, getAccountList} = require('../models/user')
+const {user,findUser,findUserById,findAllUser,addUser,removeUser,updateUser,BanOrUnban, getAccountList} = require('../models/user')
 exports.getAccountList = async (req,res,next) =>{
     const accountList = await getAccountList();
     console.log(accountList.length);

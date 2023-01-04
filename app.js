@@ -32,6 +32,7 @@ const updateProductRouter = require('./products/updateProductRouter');
 //const removeProductRouter = require('./products/removeProductRouter');
 
 const accountDetailRouter = require('./account-list/accountDetailRouter');
+const orderDetailRouter = require('./customer-order/customerOrderDetailRouter');
 var paginate = require('handlebars-paginate');
 const app = express();
 let port = process.env.PORT || 80
@@ -89,6 +90,7 @@ app.use('/update-product', updateProductRouter);
 //app.use('/:id/remove-product', removeProductRouter);
 app.use('/account_detail', accountDetailRouter);
 app.use('/add-product', addProductRouter);
+app.use('/order_detail', orderDetailRouter);
 app.use('/logout', (req, res) => {
   req.logout(function (err) {
     if (err) {

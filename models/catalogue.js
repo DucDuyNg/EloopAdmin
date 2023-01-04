@@ -30,8 +30,8 @@ async function findCatalogue(account){
 }
 //findCatalogueIdByName('THỰC PHẨM HỮU CƠ')
 async function findCatalogueIdByName(name){
-  const catalogueInstance = await catalogue.findOne({where : {name:name}})
-  console.log(catalogueInstance.id)
+  const catalogueInstance = await sequelize.query(`select id from catalogues where name = '${name}`,
+                                {type: sequelize.QueryTypes.SELECT})
   if (catalogueInstance === null){
     console.log('Not found!')
   }else{
