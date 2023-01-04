@@ -5,8 +5,6 @@ exports.showAdminLogin = (req, res, next) => {
     res.render('features/login')
 }
 exports.checkUserCredential = async (account, password) => {
-    account = 'admin'
-    password = 'admin'
     const user = await admin.findAdmin(account)
     if (!user) return null;
     if (await bcrypt.compare(password, user.password))
